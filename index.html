@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNL SVT Climate Change Revision v3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 12px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 25px 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        header h1 {
+            color: #333;
+            font-size: 1.6em;
+            margin-bottom: 6px;
+        }
+
+        header .subtitle {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 3px;
+        }
+
+        header .level {
+            color: #999;
+            font-size: 0.85em;
+            font-style: italic;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 700;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .score-display .score-value {
+            font-size: 1.3em;
+            display: block;
+            margin-top: 4px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab-btn {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.8em;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .tab-btn {
+                padding: 14px 24px;
+                font-size: 0.95em;
+            }
+        }
+
+        .tab-btn.lesson1 { background: linear-gradient(135deg, #8B4513, #A0522D); }
+        .tab-btn.lesson2 { background: linear-gradient(135deg, #FF6B35, #F7931E); }
+        .tab-btn.lesson3 { background: linear-gradient(135deg, #4A4A4A, #666666); }
+        .tab-btn.lesson4 { background: linear-gradient(135deg, #1E90FF, #00BFFF); }
+
+        .tab-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .tab-btn.active {
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .lesson {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .lesson.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .lesson-container {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 20px 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        @media (min-width: 768px) {
+            .lesson-container {
+                padding: 40px;
+            }
+        }
+
+        .lesson h2 {
+            margin-bottom: 25px;
+            font-size: 1.4em;
+            color: #333;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        @media (min-width: 768px) {
+            .lesson h2 {
+                font-size: 1.9em;
+                margin-bottom: 30px;
+            }
+        }
+
+        .section-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #667eea;
+            margin-top: 25px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .section-title {
+                font-size: 1.3em;
+                margin-top: 35px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .exercise {
+            background: #f8f9fa;
+            padding: 15px 12px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            font-size: 0.95em;
+        }
+
+        @media (min-width: 768px) {
+            .exercise {
+                padding: 20px;
+                margin-bottom: 18px;
+                font-size: 1em;
+            }
+        }
+
+        .exercise p {
+            margin-bottom: 10px;
+            color: #333;
+            line-height: 1.5;
+            font-size: inherit;
+        }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95em;
+            font-family: 'Segoe UI', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        textarea {
+            min-height: 70px;
+            resize: vertical;
+        }
+
+        button.check-btn {
+            padding: 8px 14px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: all 0.3s;
+            white-space: normal;
+            margin-top: 8px;
+            margin-right: 6px;
+        }
+
+        @media (min-width: 768px) {
+            button.check-btn {
+                padding: 10px 22px;
+                font-size: 0.9em;
+                white-space: nowrap;
+            }
+        }
+
+        button.check-btn:hover {
+            background: #764ba2;
+            transform: translateY(-2px);
+        }
+
+        button.check-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .feedback {
+            margin-top: 12px;
+            padding: 12px 15px;
+            border-radius: 6px;
+            display: none;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+            border-left: 4px solid #28a745;
+            display: block;
+        }
+
+        .feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+            border-left: 4px solid #f5c6cb;
+            display: block;
+        }
+
+        .feedback.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border-left: 4px solid #17a2b8;
+            display: block;
+        }
+
+        .hint {
+            background: #fff3cd;
+            color: #856404;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            font-size: 0.9em;
+            border-left: 4px solid #ffc107;
+        }
+
+        .option {
+            display: block;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option:hover {
+            background: #f0f4ff;
+            border-color: #667eea;
+        }
+
+        .option input[type="radio"] {
+            margin-right: 8px;
+        }
+
+        /* Drag & Drop Chain Styles */
+        .chain-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            margin-top: 15px;
+            min-height: 200px;
+        }
+
+        .chain-display {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            align-items: center;
+        }
+
+        .chain-slot {
+            width: 100%;
+            max-width: 300px;
+            background: white;
+            border: 3px dashed #667eea;
+            padding: 20px;
+            border-radius: 8px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            text-align: center;
+            cursor: drop;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .chain-slot.filled {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: 3px solid #667eea;
+            font-weight: 500;
+        }
+
+        .chain-slot:hover {
+            border-color: #764ba2;
+            background: #f0f4ff;
+        }
+
+        .chain-slot.filled:hover {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+        }
+
+        .chain-arrow {
+            text-align: center;
+            color: #667eea;
+            font-size: 2em;
+            font-weight: bold;
+            margin: 8px 0;
+            height: 20px;
+        }
+
+        .chain-source {
+            background: #f9f9f9;
+            padding: 15px;
+            border: 2px dashed #999;
+            border-radius: 8px;
+            margin-top: 15px;
+            min-height: 80px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 768px) {
+            .chain-source {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .chain-source-item {
+            background: white;
+            border: 2px solid #999;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: grab;
+            text-align: center;
+            transition: all 0.2s;
+            font-size: 0.9em;
+            touch-action: none;
+        }
+
+        .chain-source-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .chain-source-item:active {
+            cursor: grabbing;
+            opacity: 0.7;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌍 Climate Change Revision</h1>
+            <p class="subtitle">DNL SVT — Anglais scientifique</p>
+            <p class="level">Terminale | Section Européenne</p>
+            <div class="score-display">
+                Lesson Score: <span class="score-value" id="score-display">0/42</span>
+            </div>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn lesson1 active" onclick="switchLesson(1)">Lesson 1<br>Industrial Revolution</button>
+            <button class="tab-btn lesson2" onclick="switchLesson(2)">Lesson 2<br>Greenhouse Effect</button>
+            <button class="tab-btn lesson3" onclick="switchLesson(3)">Lesson 3<br>Great Smog</button>
+            <button class="tab-btn lesson4" onclick="switchLesson(4)">Lesson 4<br>London 2050</button>
+        </div>
+
+        <!-- ==================== LESSON 1 ==================== -->
+        <div class="lesson lesson1 active">
+            <div class="lesson-container">
+                <h2>⚙️ Lesson 1: The Industrial Revolution</h2>
+
+                <!-- A. QUICK RECALL -->
+                <div class="section-title"><span class="section-icon">🔑</span> A. QUICK RECALL</div>
+
+                <div class="exercise">
+                    <p><strong>1. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">A hard, black rock that is a fossil fuel burned for energy:</p>
+                    <input type="text" id="l1_q1" placeholder="">
+                    <button class="check-btn" onclick="checkL1Q1()" id="btn_l1_q1">Check</button>
+                    <div class="feedback" id="fbL1Q1"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>2. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">A dark liquid fossil fuel extracted from underground:</p>
+                    <input type="text" id="l1_q2" placeholder="">
+                    <button class="check-btn" onclick="checkL1Q2()" id="btn_l1_q2">Check</button>
+                    <div class="feedback" id="fbL1Q2"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>3. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">James Watt's revolutionary invention that powered factories and machines, making large-scale manufacturing possible:</p>
+                    <input type="text" id="l1_q3" placeholder="">
+                    <button class="check-btn" onclick="checkL1Q3()" id="btn_l1_q3">Check</button>
+                    <div class="feedback" id="fbL1Q3"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>4. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">"When factories burn fossil fuels, they release _____ that rise into the atmosphere."</p>
+                    <input type="text" id="l1_q4" placeholder="">
+                    <button class="check-btn" onclick="checkL1Q4()" id="btn_l1_q4">Check</button>
+                    <div class="feedback" id="fbL1Q4"></div>
+                </div>
+
+                <!-- B. USE YOUR ENGLISH -->
+                <div class="section-title"><span class="section-icon">✍️</span> B. USE YOUR ENGLISH</div>
+
+                <div class="exercise">
+                    <p><strong>5. Complete with ONE word only:</strong></p>
+                    <p style="margin-top: 12px;">"When coal burns, it produces carbon dioxide. This process is called _____."</p>
+                    <input type="text" id="l1_q5" placeholder="">
+                    <button class="check-btn" onclick="checkL1Q5()" id="btn_l1_q5">Check</button>
+                    <div class="feedback" id="fbL1Q5"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>6. Reorder these words to make a sentence about the Industrial Revolution:</strong></p>
+                    <p style="margin-top: 12px;">revolution / coal / burning / atmospheric / the / increased / industrial / during / CO₂</p>
+                    <textarea id="l1_q6" placeholder="Write your sentence here..."></textarea>
+                    <button class="check-btn" onclick="checkL1Q6()" id="btn_l1_q6">Check</button>
+                    <div class="feedback" id="fbL1Q6"></div>
+                    <div class="hint">Hint: Think about what happened when coal burning began during the Industrial Revolution</div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>7. Choose the correct form (to rise):</strong></p>
+                    <p style="margin-top: 12px;">"Atmospheric CO₂ _____ from about 280 ppm in 1700 to over 400 ppm today."</p>
+                    <div style="margin-top: 10px;">
+                        <label class="option">
+                            <input type="radio" name="l1_q7" value="a">
+                            has risen
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l1_q7" value="b">
+                            is rising
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l1_q7" value="c">
+                            rose
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkL1Q7()" id="btn_l1_q7">Check</button>
+                    <div class="feedback" id="fbL1Q7"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>8. Complete the dialogue:</strong></p>
+                    <p style="margin-top: 12px;"><strong>A:</strong> "Why did CO₂ levels increase so much during the Industrial Revolution?"<br><strong>B:</strong> "Because _____________________"</p>
+                    <textarea id="l1_q8" placeholder="Write your answer..."></textarea>
+                    <button class="check-btn" onclick="checkL1Q8()" id="btn_l1_q8">Check</button>
+                    <div class="feedback" id="fbL1Q8"></div>
+                    <div class="hint">Hint: Think about coal, factories, and burning fossil fuels</div>
+                </div>
+
+                <!-- C. THINK LIKE A SCIENTIST -->
+                <div class="section-title"><span class="section-icon">🔬</span> C. THINK LIKE A SCIENTIST</div>
+
+                <div class="exercise">
+                    <p><strong>9. Drag the events in the correct causal order:</strong></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+
+                    <div class="chain-container">
+                        <div class="chain-display" id="l1_chain_display">
+                            <div class="chain-slot" data-slot="1"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="2"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="3"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="4"></div>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <div class="chain-source" id="l1_chain_source">
+                        <div class="chain-source-item" draggable="true" data-id="l1-c3">Carbon dioxide is released</div>
+                        <div class="chain-source-item" draggable="true" data-id="l1-c1">The Industrial Revolution begins</div>
+                        <div class="chain-source-item" draggable="true" data-id="l1-c4">Atmospheric CO₂ rises</div>
+                        <div class="chain-source-item" draggable="true" data-id="l1-c2">Factories burn coal and oil</div>
+                    </div>
+
+                    <button class="check-btn" onclick="checkChainOrder('l1')" id="btn_l1_chain">Check order</button>
+                    <div class="feedback" id="fbL1Chain"></div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <!-- ==================== LESSON 2 ==================== -->
+        <div class="lesson lesson2">
+            <div class="lesson-container">
+                <h2>🌡️ Lesson 2: The Greenhouse Effect</h2>
+
+                <!-- A. QUICK RECALL -->
+                <div class="section-title"><span class="section-icon">🔑</span> A. QUICK RECALL</div>
+
+                <div class="exercise">
+                    <p><strong>1. Fill in with the correct words:</strong></p>
+                    <p style="margin-top: 12px;">Coal and oil are examples of _____, which are burned to produce energy.</p>
+                    <input type="text" id="l2_q1" placeholder="">
+                    <button class="check-btn" onclick="checkL2Q1()" id="btn_l2_q1">Check</button>
+                    <div class="feedback" id="fbL2Q1"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>2. Fill in with the correct words:</strong></p>
+                    <p style="margin-top: 12px;">Carbon dioxide and methane are examples of _____, which trap heat in the atmosphere.</p>
+                    <input type="text" id="l2_q2" placeholder="">
+                    <button class="check-btn" onclick="checkL2Q2()" id="btn_l2_q2">Check</button>
+                    <div class="feedback" id="fbL2Q2"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>3. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">The greenhouse effect occurs when gases absorb _____ radiation that is emitted from Earth's surface.</p>
+                    <input type="text" id="l2_q3" placeholder="">
+                    <button class="check-btn" onclick="checkL2Q3()" id="btn_l2_q3">Check</button>
+                    <div class="feedback" id="fbL2Q3"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>4. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">The _____ greenhouse effect refers to the intensification of global warming due to human activities since the Industrial Revolution.</p>
+                    <input type="text" id="l2_q4" placeholder="">
+                    <button class="check-btn" onclick="checkL2Q4()" id="btn_l2_q4">Check</button>
+                    <div class="feedback" id="fbL2Q4"></div>
+                </div>
+
+                <!-- B. USE YOUR ENGLISH -->
+                <div class="section-title"><span class="section-icon">✍️</span> B. USE YOUR ENGLISH</div>
+
+                <div class="exercise">
+                    <p><strong>5. Complete with the correct verb form (to absorb):</strong></p>
+                    <p style="margin-top: 12px;">"When infrared radiation strikes greenhouse gases, it is _____ and then re-emitted back to Earth's surface."</p>
+                    <input type="text" id="l2_q5" placeholder="">
+                    <button class="check-btn" onclick="checkL2Q5()" id="btn_l2_q5">Check</button>
+                    <div class="feedback" id="fbL2Q5"></div>
+                    <div class="hint">Hint: Use the past participle in passive voice</div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>6. Fill in with the correct verb form (to increase):</strong></p>
+                    <p style="margin-top: 12px;">"Global temperatures have _____ by 1.1°C since the beginning of the Industrial Revolution."</p>
+                    <input type="text" id="l2_q7" placeholder="">
+                    <button class="check-btn" onclick="checkL2Q7()" id="btn_l2_q7">Check</button>
+                    <div class="feedback" id="fbL2Q7"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>7. Translate this idea into English:</strong></p>
+                    <p style="margin-top: 12px;">How would you explain to a friend why greenhouse gases trap heat in the atmosphere? Write 1-2 sentences.</p>
+                    <textarea id="l2_q7b" placeholder="Write your explanation..."></textarea>
+                    <button class="check-btn" onclick="checkL2Q7b()" id="btn_l2_q7b">Check</button>
+                    <div class="feedback" id="fbL2Q7b"></div>
+                    <div class="hint">Hint: Think about infrared radiation and how gases like CO₂ absorb and re-emit heat</div>
+                </div>
+
+                <!-- C. THINK LIKE A SCIENTIST -->
+                <div class="section-title"><span class="section-icon">🔬</span> C. THINK LIKE A SCIENTIST</div>
+
+                <div class="exercise">
+                    <p><strong>9. Drag the events in the correct causal order:</strong></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+
+                    <div class="chain-container">
+                        <div class="chain-display" id="l2_chain_display">
+                            <div class="chain-slot" data-slot="1"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="2"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="3"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="4"></div>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <div class="chain-source" id="l2_chain_source">
+                        <div class="chain-source-item" draggable="true" data-id="l2-c3">Infrared radiation is absorbed by greenhouse gases</div>
+                        <div class="chain-source-item" draggable="true" data-id="l2-c1">Fossil fuels are burned</div>
+                        <div class="chain-source-item" draggable="true" data-id="l2-c4">Earth's surface and lower atmosphere warm</div>
+                        <div class="chain-source-item" draggable="true" data-id="l2-c2">Carbon dioxide is emitted into the atmosphere</div>
+                    </div>
+
+                    <button class="check-btn" onclick="checkChainOrder('l2')" id="btn_l2_chain">Check order</button>
+                    <div class="feedback" id="fbL2Chain"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== LESSON 3 ==================== -->
+        <div class="lesson lesson3">
+            <div class="lesson-container">
+                <h2>☁️ Lesson 3: The Great Smog of London 1952</h2>
+
+                <!-- A. QUICK RECALL -->
+                <div class="section-title"><span class="section-icon">🔑</span> A. QUICK RECALL</div>
+
+                <div class="exercise">
+                    <p><strong>1. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">A thick, toxic fog caused by mixing air pollutants with moisture is called _____.</p>
+                    <input type="text" id="l3_q1" placeholder="">
+                    <button class="check-btn" onclick="checkL3Q1()" id="btn_l3_q1">Check</button>
+                    <div class="feedback" id="fbL3Q1"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>2. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">Very small particles of pollution suspended in the air, such as PM₂.₅, are called _____ matter.</p>
+                    <input type="text" id="l3_q2" placeholder="">
+                    <button class="check-btn" onclick="checkL3Q2()" id="btn_l3_q2">Check</button>
+                    <div class="feedback" id="fbL3Q2"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>3. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">The 1952 London smog caused thousands of deaths from _____ diseases, such as bronchitis and asthma.</p>
+                    <input type="text" id="l3_q3" placeholder="">
+                    <button class="check-btn" onclick="checkL3Q3()" id="btn_l3_q3">Check</button>
+                    <div class="feedback" id="fbL3Q3"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>4. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">Medical experts found _____ that air pollution was directly responsible for excess deaths during the smog event.</p>
+                    <input type="text" id="l3_q4" placeholder="">
+                    <button class="check-btn" onclick="checkL3Q4()" id="btn_l3_q4">Check</button>
+                    <div class="feedback" id="fbL3Q4"></div>
+                </div>
+
+                <!-- B. USE YOUR ENGLISH -->
+                <div class="section-title"><span class="section-icon">✍️</span> B. USE YOUR ENGLISH</div>
+
+                <div class="exercise">
+                    <p><strong>5. Complete with the correct verb form (to expose):</strong></p>
+                    <p style="margin-top: 12px;">"Londoners were _____ to extremely high levels of nitrogen dioxide and sulphur dioxide during the 1952 smog."</p>
+                    <input type="text" id="l3_q5" placeholder="">
+                    <button class="check-btn" onclick="checkL3Q5()" id="btn_l3_q5">Check</button>
+                    <div class="feedback" id="fbL3Q5"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>6. Match the cause to its health effect during the 1952 London smog:</strong></p>
+                    <p style="margin-top: 12px;"><strong>Cause:</strong> High levels of NO₂ and SO₂ in the air</p>
+                    <p style="margin-top: 8px;"><strong>Effect:</strong> Write what health problems this caused (2-3 words):</p>
+                    <input type="text" id="l3_q6" placeholder="">
+                    <button class="check-btn" onclick="checkL3Q6()" id="btn_l3_q6">Check</button>
+                    <div class="feedback" id="fbL3Q6"></div>
+                    <div class="hint">Hint: Think about respiratory system and diseases mentioned in section A</div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>7. Complete the short text:</strong></p>
+                    <p style="margin-top: 12px;">Write a brief explanation (2-3 sentences) of how poor air quality affects the respiratory system during a smog event:</p>
+                    <textarea id="l3_q7" placeholder="Write your explanation..."></textarea>
+                    <button class="check-btn" onclick="checkL3Q7()" id="btn_l3_q7">Check</button>
+                    <div class="feedback" id="fbL3Q7"></div>
+                    <div class="hint">Hint: Link pollutants → particles in lungs → respiratory problems</div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>8. Complete the sentence:</strong></p>
+                    <p style="margin-top: 12px;">"According to air quality guidelines set by WHO, the safe _____ of PM₂.₅ should not exceed 15 µg/m³."</p>
+                    <input type="text" id="l3_q8" placeholder="">
+                    <button class="check-btn" onclick="checkL3Q8()" id="btn_l3_q8">Check</button>
+                    <div class="feedback" id="fbL3Q8"></div>
+                </div>
+
+                <!-- C. THINK LIKE A SCIENTIST -->
+                <div class="section-title"><span class="section-icon">🔬</span> C. THINK LIKE A SCIENTIST</div>
+
+                <div class="exercise">
+                    <p><strong>9. Drag the events in the correct causal order:</strong></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+
+                    <div class="chain-container">
+                        <div class="chain-display" id="l3_chain_display">
+                            <div class="chain-slot" data-slot="1"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="2"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="3"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="4"></div>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <div class="chain-source" id="l3_chain_source">
+                        <div class="chain-source-item" draggable="true" data-id="l3-c2">High concentrations of nitrogen dioxide and sulphur dioxide accumulate</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c1">Coal is burned for heating and power in London</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c3">Smog traps pollutants over the city</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c4">Thousands of people experience respiratory problems and die</div>
+                    </div>
+
+                    <button class="check-btn" onclick="checkChainOrder('l3')" id="btn_l3_chain">Check order</button>
+                    <div class="feedback" id="fbL3Chain"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ==================== LESSON 4 ==================== -->
+        <div class="lesson lesson4">
+            <div class="lesson-container">
+                <h2>🏠 Lesson 4: London 2050 – Climate Projections</h2>
+
+                <!-- A. QUICK RECALL -->
+                <div class="section-title"><span class="section-icon">🔑</span> A. QUICK RECALL</div>
+
+                <div class="exercise">
+                    <p><strong>1. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">An extreme weather event characterized by abnormally high temperatures over an extended period is called a _____.</p>
+                    <input type="text" id="l4_q1" placeholder="">
+                    <button class="check-btn" onclick="checkL4Q1()" id="btn_l4_q1">Check</button>
+                    <div class="feedback" id="fbL4Q1"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>2. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">The gradual rise in ocean levels caused by melting ice sheets and thermal expansion is called _____.</p>
+                    <input type="text" id="l4_q2" placeholder="">
+                    <button class="check-btn" onclick="checkL4Q2()" id="btn_l4_q2">Check</button>
+                    <div class="feedback" id="fbL4Q2"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>3. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">A phenomenon where urban areas experience higher temperatures than surrounding rural areas is called the urban _____ island.</p>
+                    <input type="text" id="l4_q3" placeholder="">
+                    <button class="check-btn" onclick="checkL4Q3()" id="btn_l4_q3">Check</button>
+                    <div class="feedback" id="fbL4Q3"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>4. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">The scarcity of freshwater resources, insufficient for human needs and ecosystems, is called _____.</p>
+                    <input type="text" id="l4_q4" placeholder="">
+                    <button class="check-btn" onclick="checkL4Q4()" id="btn_l4_q4">Check</button>
+                    <div class="feedback" id="fbL4Q4"></div>
+                </div>
+
+                <!-- B. USE YOUR ENGLISH -->
+                <div class="section-title"><span class="section-icon">✍️</span> B. USE YOUR ENGLISH</div>
+
+                <div class="exercise">
+                    <p><strong>5. Complete with the correct verb form (to threaten):</strong></p>
+                    <p style="margin-top: 12px;">"Rising sea levels _____ London's infrastructure, including subway systems and coastal defenses, by 2050."</p>
+                    <input type="text" id="l4_q5" placeholder="">
+                    <button class="check-btn" onclick="checkL4Q5()" id="btn_l4_q5">Check</button>
+                    <div class="feedback" id="fbL4Q5"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>6. Choose the correct answer:</strong></p>
+                    <p style="margin-top: 12px;">If temperatures _____ to increase, London will experience more frequent and intense heatwaves.</p>
+                    <div style="margin-top: 10px;">
+                        <label class="option">
+                            <input type="radio" name="l4_q6" value="a">
+                            continue
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l4_q6" value="b">
+                            are continuing
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l4_q6" value="c">
+                            have continued
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkRadio('l4_q6', 'a', 'fbL4Q6')" id="btn_l4_q6">Check</button>
+                    <div class="feedback" id="fbL4Q6"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>7. Fill in with the correct word:</strong></p>
+                    <p style="margin-top: 12px;">"Climate projections for 2050 show that water _____ will become a critical challenge for cities like London."</p>
+                    <input type="text" id="l4_q7" placeholder="">
+                    <button class="check-btn" onclick="checkL4Q7()" id="btn_l4_q7">Check</button>
+                    <div class="feedback" id="fbL4Q7"></div>
+                </div>
+
+                <div class="exercise">
+                    <p><strong>8. Complete the sentence:</strong></p>
+                    <p style="margin-top: 12px;">"Green infrastructure and sustainable urban planning must _____ now to protect London from future climate impacts."</p>
+                    <input type="text" id="l4_q8" placeholder="">
+                    <button class="check-btn" onclick="checkL4Q8()" id="btn_l4_q8">Check</button>
+                    <div class="feedback" id="fbL4Q8"></div>
+                </div>
+
+                <!-- C. THINK LIKE A SCIENTIST -->
+                <div class="section-title"><span class="section-icon">🔬</span> C. THINK LIKE A SCIENTIST</div>
+
+                <div class="exercise">
+                    <p><strong>9. Drag the events in the correct causal order:</strong></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+
+                    <div class="chain-container">
+                        <div class="chain-display" id="l4_chain_display">
+                            <div class="chain-slot" data-slot="1"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="2"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="3"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="4"></div>
+                        </div>
+                    </div>
+
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <div class="chain-source" id="l4_chain_source">
+                        <div class="chain-source-item" draggable="true" data-id="l4-c3">Urban heat island effect intensifies local temperatures</div>
+                        <div class="chain-source-item" draggable="true" data-id="l4-c1">Global temperatures rise due to greenhouse gas emissions</div>
+                        <div class="chain-source-item" draggable="true" data-id="l4-c2">Sea levels rise and flooding events increase</div>
+                        <div class="chain-source-item" draggable="true" data-id="l4-c4">London faces water stress, heatwaves, and infrastructure challenges by 2050</div>
+                    </div>
+
+                    <button class="check-btn" onclick="checkChainOrder('l4')" id="btn_l4_chain">Check order</button>
+                    <div class="feedback" id="fbL4Chain"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>DNL SVT Revision | Drag-and-drop causal chains | Mobile-friendly</p>
+    </footer>
+
+    <script>
+        // ==================== SCORING SYSTEM ====================
+        const scores = {
+            l1: 0,
+            l2: 0,
+            l3: 0,
+            l4: 0
+        };
+
+        const maxScores = {
+            l1: 10,  // 8 questions + 1 chain
+            l2: 8,   // 7 questions + 1 chain
+            l3: 9,   // 8 questions + 1 chain
+            l4: 8    // 7 questions + 1 chain
+        };
+
+        let currentLesson = 'l1';
+
+        function updateScoreDisplay() {
+            const total = scores[currentLesson];
+            const max = maxScores[currentLesson];
+            document.getElementById('score-display').textContent = `${total}/${max}`;
+        }
+
+        function addPoint(lesson) {
+            scores[lesson]++;
+            if (lesson === currentLesson) {
+                updateScoreDisplay();
+            }
+        }
+
+        function disableQuestion(inputId, btnId) {
+            const input = document.getElementById(inputId);
+            const btn = document.getElementById(btnId);
+            if (input) {
+                input.disabled = true;
+                input.style.opacity = '0.6';
+                input.style.cursor = 'not-allowed';
+            }
+            if (btn) {
+                btn.disabled = true;
+            }
+        }
+
+        function disableRadios(name) {
+            document.querySelectorAll(`input[name="${name}"]`).forEach(r => {
+                r.disabled = true;
+            });
+        }
+
+        // Tab switching
+        function switchLesson(num) {
+            document.querySelectorAll('.lesson').forEach(l => l.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.lesson')[num - 1].classList.add('active');
+            document.querySelectorAll('.tab-btn')[num - 1].classList.add('active');
+            currentLesson = 'l' + num;
+            updateScoreDisplay();
+            window.scrollTo(0, 0);
+        }
+
+        // Check radio
+        function checkRadio(name, correct, feedbackId) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const fb = document.getElementById(feedbackId);
+            const btnId = `btn_${name}`;
+
+            if (!selected) {
+                fb.className = 'feedback incorrect';
+                fb.textContent = '❌ Please select an option.';
+                return;
+            }
+
+            if (selected.value === correct) {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct!';
+                addPoint(currentLesson);
+                disableRadios(name);
+                document.getElementById(btnId).disabled = true;
+            } else {
+                // Show correct answer
+                const correctLabel = document.querySelector(`input[name="${name}"][value="${correct}"]`).parentElement.textContent.trim();
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = `❌ Incorrect. The correct answer is: <strong>${correctLabel}</strong>`;
+                disableRadios(name);
+                document.getElementById(btnId).disabled = true;
+            }
+        }
+
+        // LESSON 2 CHECKS
+        function checkL2Q1() {
+            const val = document.getElementById('l2_q1').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q1');
+            if (val === 'fossil fuel' || val === 'fossil fuels') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: fossil fuel(s)';
+                addPoint('l2');
+                disableQuestion('l2_q1', 'btn_l2_q1');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>fossil fuels</strong>';
+                disableQuestion('l2_q1', 'btn_l2_q1');
+            }
+        }
+
+        function checkL2Q2() {
+            const val = document.getElementById('l2_q2').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q2');
+            if (val === 'greenhouse gas' || val === 'greenhouse gases') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: greenhouse gas(es)';
+                addPoint('l2');
+                disableQuestion('l2_q2', 'btn_l2_q2');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>greenhouse gases</strong>';
+                disableQuestion('l2_q2', 'btn_l2_q2');
+            }
+        }
+
+        function checkL2Q3() {
+            const val = document.getElementById('l2_q3').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q3');
+            if (val === 'infrared' || val === 'infrared radiation') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: infrared';
+                addPoint('l2');
+                disableQuestion('l2_q3', 'btn_l2_q3');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>infrared</strong>';
+                disableQuestion('l2_q3', 'btn_l2_q3');
+            }
+        }
+
+        function checkL2Q4() {
+            const val = document.getElementById('l2_q4').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q4');
+            if (val === 'enhanced' || val === 'anthropogenic' || val === 'human-induced') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: enhanced (or anthropogenic/human-induced)';
+                addPoint('l2');
+                disableQuestion('l2_q4', 'btn_l2_q4');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>enhanced</strong> (or anthropogenic)';
+                disableQuestion('l2_q4', 'btn_l2_q4');
+            }
+        }
+
+        function checkL2Q5() {
+            const val = document.getElementById('l2_q5').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q5');
+            if (val === 'absorbed') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: absorbed (past participle in passive voice)';
+                addPoint('l2');
+                disableQuestion('l2_q5', 'btn_l2_q5');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>absorbed</strong>';
+                disableQuestion('l2_q5', 'btn_l2_q5');
+            }
+        }
+
+        function checkL2Q7() {
+            const val = document.getElementById('l2_q7').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q7');
+            if (val === 'increased') {
+                fb.className = 'feedback correct';
+                fb.innerHTML = '✓ Correct: "increased" (present perfect)<br><br><strong>Why:</strong> "have increased" is the present perfect form, showing an action that began in the past and continues to affect the present. The temperature rise since the Industrial Revolution is an ongoing consequence.';
+                addPoint('l2');
+                disableQuestion('l2_q7', 'btn_l2_q7');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>increased</strong> (use present perfect: have increased)';
+                disableQuestion('l2_q7', 'btn_l2_q7');
+            }
+        }
+
+        function checkL2Q8() {
+            const val = document.getElementById('l2_q8').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q8');
+            if (val === 'emitted' || val === 're-emitted') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: emitted (or re-emitted)';
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.textContent = '❌ Expected: emitted (or re-emitted)';
+            }
+        }
+
+        function checkL2Q7b() {
+            const val = document.getElementById('l2_q7b').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL2Q7b');
+            // Check for key concepts: gases/greenhouse + absorb/trap + heat/infrared + re-emitted/return/trap
+            if ((val.includes('gas') || val.includes('co2') || val.includes('carbon')) &&
+                (val.includes('absorb') || val.includes('trap') || val.includes('catch')) &&
+                (val.includes('heat') || val.includes('infrared') || val.includes('radiation'))) {
+                fb.className = 'feedback correct';
+                fb.innerHTML = '✓ Great explanation! You linked gases to heat trapping.<br><strong>Sample:</strong> "Greenhouse gases like CO₂ absorb infrared radiation from Earth and trap the heat in the atmosphere, warming the planet."';
+                addPoint('l2');
+                disableQuestion('l2_q7b', 'btn_l2_q7b');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Your explanation should include: what greenhouse gases do + how they trap heat (absorption/re-emission concept).<br><strong>Sample:</strong> "Greenhouse gases like CO₂ absorb infrared radiation from Earth and trap the heat in the atmosphere, warming the planet."';
+                disableQuestion('l2_q7b', 'btn_l2_q7b');
+            }
+        }
+
+        // LESSON 3 CHECKS
+        function checkL3Q1() {
+            const val = document.getElementById('l3_q1').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q1');
+            if (val === 'smog') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: smog';
+                addPoint('l3');
+                disableQuestion('l3_q1', 'btn_l3_q1');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>smog</strong>';
+                disableQuestion('l3_q1', 'btn_l3_q1');
+            }
+        }
+
+        function checkL3Q2() {
+            const val = document.getElementById('l3_q2').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q2');
+            if (val === 'particulate') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: particulate';
+                addPoint('l3');
+                disableQuestion('l3_q2', 'btn_l3_q2');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>particulate</strong>';
+                disableQuestion('l3_q2', 'btn_l3_q2');
+            }
+        }
+
+        function checkL3Q3() {
+            const val = document.getElementById('l3_q3').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q3');
+            if (val === 'respiratory') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: respiratory';
+                addPoint('l3');
+                disableQuestion('l3_q3', 'btn_l3_q3');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>respiratory</strong>';
+                disableQuestion('l3_q3', 'btn_l3_q3');
+            }
+        }
+
+        function checkL3Q4() {
+            const val = document.getElementById('l3_q4').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q4');
+            if (val === 'evidence') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: evidence';
+                addPoint('l3');
+                disableQuestion('l3_q4', 'btn_l3_q4');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>evidence</strong>';
+                disableQuestion('l3_q4', 'btn_l3_q4');
+            }
+        }
+
+        function checkL3Q5() {
+            const val = document.getElementById('l3_q5').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q5');
+            if (val === 'exposed') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: exposed (passive voice past participle)';
+                addPoint('l3');
+                disableQuestion('l3_q5', 'btn_l3_q5');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>exposed</strong>';
+                disableQuestion('l3_q5', 'btn_l3_q5');
+            }
+        }
+
+        function checkL3Q6() {
+            const val = document.getElementById('l3_q6').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q6');
+            // Accept: respiratory illness/disease/problems, bronchitis, asthma, lung disease, breathing problems
+            if (val.includes('respir') || val.includes('bronchi') || val.includes('asthma') ||
+                val.includes('lung') || val.includes('breath') || val.includes('illness') || val.includes('disease')) {
+                fb.className = 'feedback correct';
+                fb.innerHTML = '✓ Correct! High pollution causes respiratory illnesses.';
+                addPoint('l3');
+                disableQuestion('l3_q6', 'btn_l3_q6');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. Think about respiratory system diseases mentioned in Section A (bronchitis, asthma, etc.).<br><strong>Sample answer:</strong> "respiratory illness" or "asthma"';
+                disableQuestion('l3_q6', 'btn_l3_q6');
+            }
+        }
+
+        function checkL3Q7() {
+            const val = document.getElementById('l3_q7').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q7');
+            // Check for: pollutants/particles + inhale/breathe + damage/harm/affect lungs/respiratory
+            if ((val.includes('pollut') || val.includes('particl') || val.includes('gas') || val.includes('no2') || val.includes('so2')) &&
+                (val.includes('inhale') || val.includes('breath') || val.includes('lung') || val.includes('respir')) &&
+                (val.includes('damag') || val.includes('harm') || val.includes('affect') || val.includes('cause') || val.includes('ill'))) {
+                fb.className = 'feedback correct';
+                fb.innerHTML = '✓ Excellent! You explained the cause-effect chain.<br><strong>Sample:</strong> "Pollutants from smog enter the lungs when people breathe. This damages the respiratory system, causing bronchitis and asthma."';
+                addPoint('l3');
+                disableQuestion('l3_q7', 'btn_l3_q7');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Your explanation should show: pollutants → inhalation → respiratory damage/disease.<br><strong>Sample:</strong> "Pollutants from smog enter the lungs when people breathe. This damages the respiratory system, causing bronchitis and asthma."';
+                disableQuestion('l3_q7', 'btn_l3_q7');
+            }
+        }
+
+        function checkL3Q8() {
+            const val = document.getElementById('l3_q8').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL3Q8');
+            if (val === 'level' || val === 'concentration') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: level (or concentration)';
+                addPoint('l3');
+                disableQuestion('l3_q8', 'btn_l3_q8');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>level</strong> (or concentration)';
+                disableQuestion('l3_q8', 'btn_l3_q8');
+            }
+        }
+
+        // LESSON 4 CHECKS
+        function checkL4Q1() {
+            const val = document.getElementById('l4_q1').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL4Q1');
+            if (val === 'heatwave') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: heatwave';
+                addPoint('l4');
+                disableQuestion('l4_q1', 'btn_l4_q1');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>heatwave</strong>';
+                disableQuestion('l4_q1', 'btn_l4_q1');
+            }
+        }
+
+        function checkL4Q2() {
+            const val = document.getElementById('l4_q2').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL4Q2');
+            if (val === 'sea-level rise' || val === 'sea level rise') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: sea-level rise (or sea level rise)';
+                addPoint('l4');
+                disableQuestion('l4_q2', 'btn_l4_q2');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>sea-level rise</strong>';
+                disableQuestion('l4_q2', 'btn_l4_q2');
+            }
+        }
+
+        function checkL4Q3() {
+            const val = document.getElementById('l4_q3').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL4Q3');
+            if (val === 'heat') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: heat';
+                addPoint('l4');
+                disableQuestion('l4_q3', 'btn_l4_q3');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>heat</strong>';
+                disableQuestion('l4_q3', 'btn_l4_q3');
+            }
+        }
+
+        function checkL4Q4() {
+            const val = document.getElementById('l4_q4').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL4Q4');
+            if (val === 'water stress') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: water stress';
+                addPoint('l4');
+                disableQuestion('l4_q4', 'btn_l4_q4');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>water stress</strong>';
+                disableQuestion('l4_q4', 'btn_l4_q4');
+            }
+        }
+
+        function checkL4Q5() {
+            const val = document.getElementById('l4_q5').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL4Q5');
+            if (val === 'threaten' || val === 'threatens') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: threaten (or threatens with "is")';
+                addPoint('l4');
+                disableQuestion('l4_q5', 'btn_l4_q5');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>threaten</strong>';
+                disableQuestion('l4_q5', 'btn_l4_q5');
+            }
+        }
+
+        function checkL4Q7() {
+            const val = document.getElementById('l4_q7').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL4Q7');
+            if (val === 'stress') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: stress';
+                addPoint('l4');
+                disableQuestion('l4_q7', 'btn_l4_q7');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>stress</strong>';
+                disableQuestion('l4_q7', 'btn_l4_q7');
+            }
+        }
+
+        function checkL4Q8() {
+            const val = document.getElementById('l4_q8').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL4Q8');
+            if (val === 'be implemented' || val === 'begin' || val === 'be developed') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: be implemented (or begin/be developed)';
+                addPoint('l4');
+                disableQuestion('l4_q8', 'btn_l4_q8');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>be implemented</strong>';
+                disableQuestion('l4_q8', 'btn_l4_q8');
+            }
+        }
+
+        // LESSON 1 CHECKS
+        function checkL1Q1() {
+            const val = document.getElementById('l1_q1').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL1Q1');
+            if (val === 'coal') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: coal';
+                addPoint('l1');
+                disableQuestion('l1_q1', 'btn_l1_q1');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>coal</strong>';
+                disableQuestion('l1_q1', 'btn_l1_q1');
+            }
+        }
+
+        function checkL1Q2() {
+            const val = document.getElementById('l1_q2').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL1Q2');
+            if (val === 'oil') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: oil';
+                addPoint('l1');
+                disableQuestion('l1_q2', 'btn_l1_q2');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>oil</strong>';
+                disableQuestion('l1_q2', 'btn_l1_q2');
+            }
+        }
+
+        function checkL1Q3() {
+            const val = document.getElementById('l1_q3').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL1Q3');
+            if (val.includes('steam engine')) {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: steam engine';
+                addPoint('l1');
+                disableQuestion('l1_q3', 'btn_l1_q3');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>steam engine</strong>';
+                disableQuestion('l1_q3', 'btn_l1_q3');
+            }
+        }
+
+        function checkL1Q4() {
+            const val = document.getElementById('l1_q4').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL1Q4');
+            if (val === 'emission' || val === 'emissions') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: emission(s)';
+                addPoint('l1');
+                disableQuestion('l1_q4', 'btn_l1_q4');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>emissions</strong>';
+                disableQuestion('l1_q4', 'btn_l1_q4');
+            }
+        }
+
+        function checkL1Q5() {
+            const val = document.getElementById('l1_q5').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL1Q5');
+            if (val === 'combustion') {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Correct: combustion';
+                addPoint('l1');
+                disableQuestion('l1_q5', 'btn_l1_q5');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>combustion</strong>';
+                disableQuestion('l1_q5', 'btn_l1_q5');
+            }
+        }
+
+        function checkL1Q6() {
+            const val = document.getElementById('l1_q6').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL1Q6');
+            // Look for key concepts: coal/burning + increased + CO2 (or atmospheric)
+            if ((val.includes('coal') || val.includes('burn')) &&
+                (val.includes('increased') || val.includes('increase') || val.includes('rose') || val.includes('rise')) &&
+                (val.includes('co') || val.includes('carbon'))) {
+                fb.className = 'feedback correct';
+                fb.innerHTML = '✓ Good! You included the key ideas: burning coal caused CO₂ to increase.<br><strong>Sample:</strong> "Burning coal during the Industrial Revolution increased atmospheric CO₂."';
+                addPoint('l1');
+                disableQuestion('l1_q6', 'btn_l1_q6');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Not quite. Your sentence should connect: coal burning → CO₂ increase during the Industrial Revolution.<br><strong>Sample answer:</strong> "Burning coal during the Industrial Revolution increased atmospheric CO₂."';
+                disableQuestion('l1_q6', 'btn_l1_q6');
+            }
+        }
+
+        function checkL1Q7() {
+            const selected = document.querySelector('input[name="l1_q7"]:checked');
+            const fb = document.getElementById('fbL1Q7');
+            if (!selected) {
+                fb.className = 'feedback incorrect';
+                fb.textContent = '❌ Please select an option.';
+                return;
+            }
+            if (selected.value === 'a') {
+                fb.className = 'feedback correct';
+                fb.innerHTML = '✓ Correct: "has risen"<br><br><strong>Why:</strong> We use present perfect here because the action started in the past (1700) and its effects continue to the present (CO₂ is still high today). Simple past "rose" would be less precise because it suggests the action is completely finished.';
+                addPoint('l1');
+                disableRadios('l1_q7');
+                document.getElementById('btn_l1_q7').disabled = true;
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>has risen</strong><br><strong>Why:</strong> Present perfect shows an action that started in the past and continues to affect the present.';
+                disableRadios('l1_q7');
+                document.getElementById('btn_l1_q7').disabled = true;
+            }
+        }
+
+        function checkL1Q8() {
+            const val = document.getElementById('l1_q8').value.toLowerCase().trim();
+            const fb = document.getElementById('fbL1Q8');
+            // Accept answers that mention: coal/fuel burning → emissions/pollution/carbon dioxide
+            if ((val.includes('coal') || val.includes('fuel') || val.includes('burn')) &&
+                (val.includes('emission') || val.includes('pollut') || val.includes('carbon') || val.includes('co'))) {
+                fb.className = 'feedback correct';
+                fb.innerHTML = '✓ Excellent! You identified the cause.<br><strong>Sample answer:</strong> "Because factories burned large amounts of coal and fossil fuels, which released carbon dioxide."';
+                addPoint('l1');
+                disableQuestion('l1_q8', 'btn_l1_q8');
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Not quite. Your answer should mention factories burning coal/fuel and releasing CO₂/emissions.<br><strong>Sample answer:</strong> "Because factories burned large amounts of coal and fossil fuels, which released carbon dioxide."';
+                disableQuestion('l1_q8', 'btn_l1_q8');
+            }
+        }
+
+        // DRAG & DROP CHAIN LOGIC WITH SLOTS
+        let draggedElement = null;
+        let chainData = {
+            'l1': {
+                1: 'l1-c1',
+                2: 'l1-c2',
+                3: 'l1-c3',
+                4: 'l1-c4'
+            },
+            'l2': {
+                1: 'l2-c1',
+                2: 'l2-c2',
+                3: 'l2-c3',
+                4: 'l2-c4'
+            },
+            'l3': {
+                1: 'l3-c1',
+                2: 'l3-c2',
+                3: 'l3-c3',
+                4: 'l3-c4'
+            },
+            'l4': {
+                1: 'l4-c1',
+                2: 'l4-c2',
+                3: 'l4-c3',
+                4: 'l4-c4'
+            }
+        };
+        let chainSlots = {
+            'l1': {
+                1: null,
+                2: null,
+                3: null,
+                4: null
+            },
+            'l2': {
+                1: null,
+                2: null,
+                3: null,
+                4: null
+            },
+            'l3': {
+                1: null,
+                2: null,
+                3: null,
+                4: null
+            },
+            'l4': {
+                1: null,
+                2: null,
+                3: null,
+                4: null
+            }
+        };
+
+        function initChainDragDrop() {
+            setupSlotDragDrop('l1');
+            setupSlotDragDrop('l2');
+            setupSlotDragDrop('l3');
+            setupSlotDragDrop('l4');
+        }
+
+        function setupSlotDragDrop(chainKey) {
+            const displayEl = document.getElementById(`${chainKey}_chain_display`);
+            const sourceEl = document.getElementById(`${chainKey}_chain_source`);
+
+            if (!displayEl || !sourceEl) return;
+
+            // Setup source items
+            document.querySelectorAll(`#${chainKey}_chain_source .chain-source-item`).forEach(item => {
+                item.addEventListener('dragstart', e => {
+                    draggedElement = item;
+                    item.style.opacity = '0.5';
+                });
+                item.addEventListener('dragend', e => {
+                    item.style.opacity = '1';
+                });
+            });
+
+            // Setup slots
+            displayEl.querySelectorAll('.chain-slot').forEach(slot => {
+                slot.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    slot.style.borderColor = '#764ba2';
+                    slot.style.backgroundColor = '#f0f4ff';
+                });
+
+                slot.addEventListener('dragleave', e => {
+                    slot.style.borderColor = '#667eea';
+                    slot.style.backgroundColor = 'white';
+                });
+
+                slot.addEventListener('drop', e => {
+                    e.preventDefault();
+                    slot.style.borderColor = '#667eea';
+                    slot.style.backgroundColor = 'white';
+
+                    if (!draggedElement) return;
+
+                    const slotNum = parseInt(slot.dataset.slot);
+                    const itemId = draggedElement.dataset.id;
+                    const itemText = draggedElement.textContent;
+
+                    chainSlots[chainKey][slotNum] = { id: itemId, text: itemText };
+                    renderSlot(chainKey, slotNum);
+                });
+
+                slot.addEventListener('click', e => {
+                    const slotNum = parseInt(slot.dataset.slot);
+                    if (chainSlots[chainKey][slotNum]) {
+                        chainSlots[chainKey][slotNum] = null;
+                        renderSlot(chainKey, slotNum);
+                    }
+                });
+            });
+        }
+
+        function renderSlot(chainKey, slotNum) {
+            const displayEl = document.getElementById(`${chainKey}_chain_display`);
+            const slot = displayEl.querySelector(`[data-slot="${slotNum}"]`);
+            const item = chainSlots[chainKey][slotNum];
+
+            if (!slot) return;
+
+            if (item) {
+                slot.textContent = item.text;
+                slot.classList.add('filled');
+                slot.style.cursor = 'pointer';
+            } else {
+                slot.textContent = '';
+                slot.classList.remove('filled');
+                slot.style.cursor = 'drop';
+            }
+        }
+
+        function checkChainOrder(chainKey) {
+            const fb = document.getElementById(`fb${chainKey.toUpperCase()}Chain`);
+            const btnId = `btn_${chainKey}_chain`;
+            const correct = chainData[chainKey];
+
+            // Check if all slots filled
+            if (Object.values(chainSlots[chainKey]).some(s => s === null)) {
+                fb.className = 'feedback incorrect';
+                fb.textContent = '❌ Please fill all slots in the chain.';
+                return;
+            }
+
+            // Check if order is correct
+            let isCorrect = true;
+            let wrongSlots = [];
+            for (let i = 1; i <= 4; i++) {
+                if (chainSlots[chainKey][i].id !== correct[i]) {
+                    isCorrect = false;
+                    wrongSlots.push(i);
+                }
+            }
+
+            if (isCorrect) {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Perfect! You got the causal chain correct!';
+                addPoint(chainKey);
+            } else {
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = '❌ Incorrect order. Please review the causal sequence and try to understand: what causes what?';
+            }
+
+            // Disable the button after checking
+            const btn = document.getElementById(btnId);
+            if (btn) btn.disabled = true;
+
+            // Disable dragging
+            document.querySelectorAll(`#${chainKey}_chain_source .chain-source-item`).forEach(item => {
+                item.draggable = false;
+                item.style.opacity = '0.6';
+                item.style.cursor = 'not-allowed';
+            });
+        }
+
+        // Initialize on load
+        window.addEventListener('load', initChainDragDrop);
+    </script>
+</body>
+</html>
