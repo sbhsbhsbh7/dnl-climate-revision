@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DNL SVT Climate Change Revision v3</title>
+    <title>DNL SVT Terminale — Review of Lesson 1 to 4</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #22332a 0%, #2d2d2d 100%);
             min-height: 100vh;
             padding: 12px;
             color: #333;
@@ -52,7 +52,7 @@
         }
 
         .score-display {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #2d4a3a, #1f3d2b);
             color: white;
             padding: 12px 20px;
             border-radius: 8px;
@@ -97,10 +97,10 @@
             }
         }
 
-        .tab-btn.lesson1 { background: linear-gradient(135deg, #8B4513, #A0522D); }
-        .tab-btn.lesson2 { background: linear-gradient(135deg, #FF6B35, #F7931E); }
-        .tab-btn.lesson3 { background: linear-gradient(135deg, #4A4A4A, #666666); }
-        .tab-btn.lesson4 { background: linear-gradient(135deg, #1E90FF, #00BFFF); }
+        .tab-btn.lesson1 { background: linear-gradient(135deg, #2d4a3a, #3f6652); }
+        .tab-btn.lesson2 { background: linear-gradient(135deg, #6b6f47, #8a8f5c); }
+        .tab-btn.lesson3 { background: linear-gradient(135deg, #333333, #555555); }
+        .tab-btn.lesson4 { background: linear-gradient(135deg, #a8841c, #c9a227); }
 
         .tab-btn:hover {
             transform: translateY(-3px);
@@ -144,7 +144,7 @@
             font-size: 1.4em;
             color: #333;
             padding-bottom: 12px;
-            border-bottom: 3px solid #667eea;
+            border-bottom: 3px solid #2d4a3a;
         }
 
         @media (min-width: 768px) {
@@ -157,7 +157,7 @@
         .section-title {
             font-size: 1.1em;
             font-weight: 700;
-            color: #667eea;
+            color: #2d4a3a;
             margin-top: 25px;
             margin-bottom: 16px;
             padding-bottom: 8px;
@@ -180,7 +180,7 @@
             padding: 15px 12px;
             margin-bottom: 14px;
             border-radius: 10px;
-            border-left: 5px solid #667eea;
+            border-left: 5px solid #2d4a3a;
             font-size: 0.95em;
         }
 
@@ -211,8 +211,8 @@
 
         input[type="text"]:focus, textarea:focus, select:focus {
             outline: none;
-            border-color: #667eea;
-            background: #f0f4ff;
+            border-color: #2d4a3a;
+            background: #eef2ee;
         }
 
         textarea {
@@ -222,7 +222,7 @@
 
         button.check-btn {
             padding: 8px 14px;
-            background: #667eea;
+            background: #2d4a3a;
             color: white;
             border: none;
             border-radius: 6px;
@@ -244,7 +244,7 @@
         }
 
         button.check-btn:hover {
-            background: #764ba2;
+            background: #6b6f47;
             transform: translateY(-2px);
         }
 
@@ -278,20 +278,20 @@
         }
 
         .feedback.info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border-left: 4px solid #17a2b8;
+            background: #eceee3;
+            color: #4a4d33;
+            border-left: 4px solid #8a8f5c;
             display: block;
         }
 
         .hint {
-            background: #fff3cd;
-            color: #856404;
+            background: #faf1d6;
+            color: #7a5e0e;
             padding: 12px 15px;
             border-radius: 6px;
             margin-top: 10px;
             font-size: 0.9em;
-            border-left: 4px solid #ffc107;
+            border-left: 4px solid #c9a227;
         }
 
         .option {
@@ -306,8 +306,8 @@
         }
 
         .option:hover {
-            background: #f0f4ff;
-            border-color: #667eea;
+            background: #eef2ee;
+            border-color: #2d4a3a;
         }
 
         .option input[type="radio"] {
@@ -335,7 +335,7 @@
             width: 100%;
             max-width: 300px;
             background: white;
-            border: 3px dashed #667eea;
+            border: 3px dashed #2d4a3a;
             padding: 20px;
             border-radius: 8px;
             min-height: 60px;
@@ -350,24 +350,24 @@
         }
 
         .chain-slot.filled {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: linear-gradient(135deg, #2d4a3a, #1f3d2b);
             color: white;
-            border: 3px solid #667eea;
+            border: 3px solid #2d4a3a;
             font-weight: 500;
         }
 
         .chain-slot:hover {
-            border-color: #764ba2;
-            background: #f0f4ff;
+            border-color: #6b6f47;
+            background: #eef2ee;
         }
 
         .chain-slot.filled:hover {
-            background: linear-gradient(135deg, #764ba2, #667eea);
+            background: linear-gradient(135deg, #1f3d2b, #2d4a3a);
         }
 
         .chain-arrow {
             text-align: center;
-            color: #667eea;
+            color: #2d4a3a;
             font-size: 2em;
             font-weight: bold;
             margin: 8px 0;
@@ -425,9 +425,9 @@
 <body>
     <div class="container">
         <header>
-            <h1>🌍 Climate Change Revision</h1>
-            <p class="subtitle">DNL SVT — Anglais scientifique</p>
-            <p class="level">Terminale | Section Européenne</p>
+            <h1>🌍 Review of Lesson 1 to 4</h1>
+            <p class="subtitle">Climate Change</p>
+            <p class="level">DNL SVT Terminale | M. LOUIS</p>
             <div class="score-display">
                 Lesson Score: <span class="score-value" id="score-display">0/42</span>
             </div>
@@ -1566,18 +1566,18 @@
             displayEl.querySelectorAll('.chain-slot').forEach(slot => {
                 slot.addEventListener('dragover', e => {
                     e.preventDefault();
-                    slot.style.borderColor = '#764ba2';
-                    slot.style.backgroundColor = '#f0f4ff';
+                    slot.style.borderColor = '#6b6f47';
+                    slot.style.backgroundColor = '#eef2ee';
                 });
 
                 slot.addEventListener('dragleave', e => {
-                    slot.style.borderColor = '#667eea';
+                    slot.style.borderColor = '#2d4a3a';
                     slot.style.backgroundColor = 'white';
                 });
 
                 slot.addEventListener('drop', e => {
                     e.preventDefault();
-                    slot.style.borderColor = '#667eea';
+                    slot.style.borderColor = '#2d4a3a';
                     slot.style.backgroundColor = 'white';
 
                     if (!draggedElement) return;
