@@ -671,16 +671,8 @@
                     <div class="feedback" id="fbL3Q4"></div>
                 </div>
 
-<div class="exercise">
-                    <p><strong>5. Complete with the correct verb form (to expose):</strong></p>
-                    <p style="margin-top: 12px;">"Londoners were _____ to extremely high levels of nitrogen dioxide and sulphur dioxide during the 1952 smog."</p>
-                    <input type="text" id="l3_q5" placeholder="">
-                    <button class="check-btn" onclick="checkL3Q5()" id="btn_l3_q5">Check</button>
-                    <div class="feedback" id="fbL3Q5"></div>
-                </div>
-
                 <div class="exercise">
-                    <p><strong>6. Match the cause to its health effect during the 1952 London smog:</strong></p>
+                    <p><strong>5. Match the cause to its health effect during the 1952 London smog:</strong></p>
                     <p style="margin-top: 12px;"><strong>Cause:</strong> High levels of NO₂ and SO₂ in the air</p>
                     <p style="margin-top: 8px;"><strong>Effect:</strong> Write what health problems this caused (2-3 words):</p>
                     <input type="text" id="l3_q6" placeholder="">
@@ -690,7 +682,7 @@
                 </div>
 
                 <div class="exercise">
-                    <p><strong>7. Complete the short text:</strong></p>
+                    <p><strong>6. Complete the short text:</strong></p>
                     <p style="margin-top: 12px;">Write a brief explanation (2-3 sentences) of how poor air quality affects the respiratory system during a smog event:</p>
                     <textarea id="l3_q7" placeholder="Write your explanation..."></textarea>
                     <button class="check-btn" onclick="checkL3Q7()" id="btn_l3_q7">Check</button>
@@ -699,7 +691,7 @@
                 </div>
 
                 <div class="exercise">
-                    <p><strong>8. Complete the sentence:</strong></p>
+                    <p><strong>7. Complete the sentence:</strong></p>
                     <p style="margin-top: 12px;">"According to air quality guidelines set by WHO, the safe _____ of PM₂.₅ should not exceed 15 µg/m³."</p>
                     <input type="text" id="l3_q8" placeholder="">
                     <button class="check-btn" onclick="checkL3Q8()" id="btn_l3_q8">Check</button>
@@ -707,7 +699,7 @@
                 </div>
 
 <div class="exercise">
-                    <p><strong>9. Drag the events in the correct causal order:</strong></p>
+                    <p><strong>8. Drag the events in the correct causal order:</strong></p>
                     <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
 
                     <div class="chain-container">
@@ -868,7 +860,7 @@
         const maxScores = {
             l1: 6,  // 5 questions + 1 chain
             l2: 7,   // 5 questions + 2 chains
-            l3: 9,   // 8 questions + 1 chain
+            l3: 8,   // 7 questions + 1 chain
             l4: 8    // 7 questions + 1 chain
         };
 
@@ -1065,21 +1057,6 @@
                 fb.className = 'feedback incorrect';
                 fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>evidence</strong>';
                 disableQuestion('l3_q4', 'btn_l3_q4');
-            }
-        }
-
-        function checkL3Q5() {
-            const val = document.getElementById('l3_q5').value.toLowerCase().trim();
-            const fb = document.getElementById('fbL3Q5');
-            if (val === 'exposed') {
-                fb.className = 'feedback correct';
-                fb.textContent = '✓ Correct: exposed (passive voice past participle)';
-                addPoint('l3');
-                disableQuestion('l3_q5', 'btn_l3_q5');
-            } else {
-                fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>exposed</strong>';
-                disableQuestion('l3_q5', 'btn_l3_q5');
             }
         }
 
