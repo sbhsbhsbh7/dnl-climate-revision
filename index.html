@@ -555,33 +555,49 @@
                 </div>
 
 <div class="exercise">
-                    <p><strong>5. Complete with the correct verb form (to absorb):</strong></p>
-                    <p style="margin-top: 12px;">"When infrared radiation strikes greenhouse gases, it is _____ and then re-emitted back to Earth's surface."</p>
-                    <input type="text" id="l2_q5" placeholder="">
-                    <button class="check-btn" onclick="checkL2Q5()" id="btn_l2_q5">Check</button>
+                    <p><strong>5. Choose the correct answer:</strong></p>
+                    <p style="margin-top: 12px;">Which of the following best explains why the greenhouse effect warms the Earth?</p>
+                    <div style="margin-top: 10px;">
+                        <label class="option">
+                            <input type="radio" name="l2_q5" value="a">
+                            Greenhouse gases block all sunlight from reaching the Earth's surface.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l2_q5" value="b">
+                            Greenhouse gases absorb infrared radiation emitted by the Earth and re-emit it back toward the surface.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l2_q5" value="c">
+                            Greenhouse gases increase the amount of oxygen in the atmosphere.
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkRadio('l2_q5', 'b', 'fbL2Q5')" id="btn_l2_q5">Check</button>
                     <div class="feedback" id="fbL2Q5"></div>
-                    <div class="hint">Hint: Use the past participle in passive voice</div>
                 </div>
 
                 <div class="exercise">
-                    <p><strong>6. Fill in with the correct verb form (to increase):</strong></p>
-                    <p style="margin-top: 12px;">"Global temperatures have _____ by 1.1°C since the beginning of the Industrial Revolution."</p>
-                    <input type="text" id="l2_q7" placeholder="">
-                    <button class="check-btn" onclick="checkL2Q7()" id="btn_l2_q7">Check</button>
-                    <div class="feedback" id="fbL2Q7"></div>
-                </div>
-
-                <div class="exercise">
-                    <p><strong>7. Translate this idea into English:</strong></p>
-                    <p style="margin-top: 12px;">How would you explain to a friend why greenhouse gases trap heat in the atmosphere? Write 1-2 sentences.</p>
-                    <textarea id="l2_q7b" placeholder="Write your explanation..."></textarea>
-                    <button class="check-btn" onclick="checkL2Q7b()" id="btn_l2_q7b">Check</button>
-                    <div class="feedback" id="fbL2Q7b"></div>
-                    <div class="hint">Hint: Think about infrared radiation and how gases like CO₂ absorb and re-emit heat</div>
+                    <p><strong>6. Choose the correct answer:</strong></p>
+                    <p style="margin-top: 12px;">What is the main difference between the natural greenhouse effect and the enhanced (human-induced) greenhouse effect?</p>
+                    <div style="margin-top: 10px;">
+                        <label class="option">
+                            <input type="radio" name="l2_q6" value="a">
+                            The natural greenhouse effect only happens at night.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l2_q6" value="b">
+                            The enhanced greenhouse effect is caused by extra greenhouse gases released by human activities, which trap more heat than the natural process alone.
+                        </label>
+                        <label class="option">
+                            <input type="radio" name="l2_q6" value="c">
+                            The enhanced greenhouse effect cools the planet instead of warming it.
+                        </label>
+                    </div>
+                    <button class="check-btn" onclick="checkRadio('l2_q6', 'b', 'fbL2Q6')" id="btn_l2_q6">Check</button>
+                    <div class="feedback" id="fbL2Q6"></div>
                 </div>
 
 <div class="exercise">
-                    <p><strong>9. Drag the events in the correct causal order:</strong></p>
+                    <p><strong>7. Drag the events in the correct causal order:</strong></p>
                     <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
 
                     <div class="chain-container">
@@ -844,7 +860,7 @@
 
         const maxScores = {
             l1: 6,  // 5 questions + 1 chain
-            l2: 8,   // 7 questions + 1 chain
+            l2: 7,   // 6 questions + 1 chain
             l3: 9,   // 8 questions + 1 chain
             l4: 8    // 7 questions + 1 chain
         };
@@ -983,65 +999,6 @@
             }
         }
 
-        function checkL2Q5() {
-            const val = document.getElementById('l2_q5').value.toLowerCase().trim();
-            const fb = document.getElementById('fbL2Q5');
-            if (val === 'absorbed') {
-                fb.className = 'feedback correct';
-                fb.textContent = '✓ Correct: absorbed (past participle in passive voice)';
-                addPoint('l2');
-                disableQuestion('l2_q5', 'btn_l2_q5');
-            } else {
-                fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>absorbed</strong>';
-                disableQuestion('l2_q5', 'btn_l2_q5');
-            }
-        }
-
-        function checkL2Q7() {
-            const val = document.getElementById('l2_q7').value.toLowerCase().trim();
-            const fb = document.getElementById('fbL2Q7');
-            if (val === 'increased') {
-                fb.className = 'feedback correct';
-                fb.innerHTML = '✓ Correct: "increased" (present perfect)<br><br><strong>Why:</strong> "have increased" is the present perfect form, showing an action that began in the past and continues to affect the present. The temperature rise since the Industrial Revolution is an ongoing consequence.';
-                addPoint('l2');
-                disableQuestion('l2_q7', 'btn_l2_q7');
-            } else {
-                fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>increased</strong> (use present perfect: have increased)';
-                disableQuestion('l2_q7', 'btn_l2_q7');
-            }
-        }
-
-        function checkL2Q8() {
-            const val = document.getElementById('l2_q8').value.toLowerCase().trim();
-            const fb = document.getElementById('fbL2Q8');
-            if (val === 'emitted' || val === 're-emitted') {
-                fb.className = 'feedback correct';
-                fb.textContent = '✓ Correct: emitted (or re-emitted)';
-            } else {
-                fb.className = 'feedback incorrect';
-                fb.textContent = '❌ Expected: emitted (or re-emitted)';
-            }
-        }
-
-        function checkL2Q7b() {
-            const val = document.getElementById('l2_q7b').value.toLowerCase().trim();
-            const fb = document.getElementById('fbL2Q7b');
-            // Check for key concepts: gases/greenhouse + absorb/trap + heat/infrared + re-emitted/return/trap
-            if ((val.includes('gas') || val.includes('co2') || val.includes('carbon')) &&
-                (val.includes('absorb') || val.includes('trap') || val.includes('catch')) &&
-                (val.includes('heat') || val.includes('infrared') || val.includes('radiation'))) {
-                fb.className = 'feedback correct';
-                fb.innerHTML = '✓ Great explanation! You linked gases to heat trapping.<br><strong>Sample:</strong> "Greenhouse gases like CO₂ absorb infrared radiation from Earth and trap the heat in the atmosphere, warming the planet."';
-                addPoint('l2');
-                disableQuestion('l2_q7b', 'btn_l2_q7b');
-            } else {
-                fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Your explanation should include: what greenhouse gases do + how they trap heat (absorption/re-emission concept).<br><strong>Sample:</strong> "Greenhouse gases like CO₂ absorb infrared radiation from Earth and trap the heat in the atmosphere, warming the planet."';
-                disableQuestion('l2_q7b', 'btn_l2_q7b');
-            }
-        }
 
         // LESSON 3 CHECKS
         function checkL3Q1() {
