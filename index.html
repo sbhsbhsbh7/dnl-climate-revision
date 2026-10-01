@@ -692,7 +692,7 @@
 
                 <div class="exercise">
                     <p><strong>7. Complete the sentence:</strong></p>
-                    <p style="margin-top: 12px;">"According to air quality guidelines set by WHO, the safe _____ of PM₂.₅ should not exceed 15 µg/m³."</p>
+                    <p style="margin-top: 12px;">"According to air quality _____ set by WHO, the safe level of PM₂.₅ should not exceed 15 µg/m³."</p>
                     <input type="text" id="l3_q8" placeholder="">
                     <button class="check-btn" onclick="checkL3Q8()" id="btn_l3_q8">Check</button>
                     <div class="feedback" id="fbL3Q8"></div>
@@ -711,15 +711,18 @@
                             <div class="chain-slot" data-slot="3"></div>
                             <div class="chain-arrow">↓</div>
                             <div class="chain-slot" data-slot="4"></div>
+                            <div class="chain-arrow">↓</div>
+                            <div class="chain-slot" data-slot="5"></div>
                         </div>
                     </div>
 
                     <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
                     <div class="chain-source" id="l3_chain_source">
-                        <div class="chain-source-item" draggable="true" data-id="l3-c2">High concentrations of nitrogen dioxide and sulphur dioxide accumulate</div>
-                        <div class="chain-source-item" draggable="true" data-id="l3-c1">Coal is burned for heating and power in London</div>
-                        <div class="chain-source-item" draggable="true" data-id="l3-c3">Smog traps pollutants over the city</div>
-                        <div class="chain-source-item" draggable="true" data-id="l3-c4">Thousands of people experience respiratory problems and die</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c3">Human exposure</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c1">Fossil-fuel combustion</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c4">Respiratory &amp; cardiovascular effects</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c2">PM₂.₅ + NO₂ + other pollutants</div>
+                        <div class="chain-source-item" draggable="true" data-id="l3-c5">Increased illness and deaths</div>
                     </div>
 
                     <button class="check-btn" onclick="checkChainOrder('l3')" id="btn_l3_chain">Check order</button>
@@ -1098,14 +1101,14 @@
         function checkL3Q8() {
             const val = document.getElementById('l3_q8').value.toLowerCase().trim();
             const fb = document.getElementById('fbL3Q8');
-            if (val === 'level' || val === 'concentration') {
+            if (val === 'guidelines' || val === 'guideline') {
                 fb.className = 'feedback correct';
-                fb.textContent = '✓ Correct: level (or concentration)';
+                fb.textContent = '✓ Correct: guidelines';
                 addPoint('l3');
                 disableQuestion('l3_q8', 'btn_l3_q8');
             } else {
                 fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>level</strong> (or concentration)';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>guidelines</strong>';
                 disableQuestion('l3_q8', 'btn_l3_q8');
             }
         }
@@ -1312,7 +1315,8 @@
                 1: 'l3-c1',
                 2: 'l3-c2',
                 3: 'l3-c3',
-                4: 'l3-c4'
+                4: 'l3-c4',
+                5: 'l3-c5'
             },
             'l4': {
                 1: 'l4-c1',
@@ -1336,10 +1340,11 @@
             'l2-c2': 'Carbon dioxide is emitted into the atmosphere',
             'l2-c3': 'Infrared radiation is absorbed by greenhouse gases',
             'l2-c4': "Earth's surface warms",
-            'l3-c1': 'Coal is burned for heating and power in London',
-            'l3-c2': 'High concentrations of nitrogen dioxide and sulphur dioxide accumulate',
-            'l3-c3': 'Smog traps pollutants over the city',
-            'l3-c4': 'Thousands of people experience respiratory problems and die',
+            'l3-c1': 'Fossil-fuel combustion',
+            'l3-c2': 'PM₂.₅ + NO₂ + other pollutants',
+            'l3-c3': 'Human exposure',
+            'l3-c4': 'Respiratory & cardiovascular effects',
+            'l3-c5': 'Increased illness and deaths',
             'l4-c1': 'Global temperatures rise due to greenhouse gas emissions',
             'l4-c2': 'Sea levels rise and flooding events increase',
             'l4-c3': 'Urban heat island effect intensifies local temperatures',
@@ -1366,7 +1371,8 @@
                 1: null,
                 2: null,
                 3: null,
-                4: null
+                4: null,
+                5: null
             },
             'l4': {
                 1: null,
@@ -1468,6 +1474,7 @@
             const fb = document.getElementById(`fb${chainKey.toUpperCase()}Chain`);
             const btnId = `btn_${chainKey}_chain`;
             const correct = chainData[chainKey];
+            const slotCount = Object.keys(correct).length;
 
             // Check if all slots filled
             if (Object.values(chainSlots[chainKey]).some(s => s === null)) {
@@ -1479,7 +1486,7 @@
             // Check if order is correct
             let isCorrect = true;
             let wrongSlots = [];
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= slotCount; i++) {
                 if (chainSlots[chainKey][i].id !== correct[i]) {
                     isCorrect = false;
                     wrongSlots.push(i);
@@ -1491,7 +1498,9 @@
                 fb.textContent = '✓ Perfect! You got the causal chain correct!';
                 addPoint(lessonKey);
             } else {
-                const correctOrder = [1, 2, 3, 4].map(i => `${i}) ${chainLabels[correct[i]]}`).join('<br>');
+                const orderNums = [];
+                for (let i = 1; i <= slotCount; i++) orderNums.push(i);
+                const correctOrder = orderNums.map(i => `${i}) ${chainLabels[correct[i]]}`).join('<br>');
                 fb.className = 'feedback incorrect';
                 fb.innerHTML = `❌ Incorrect order. The correct order was:<br>${correctOrder}`;
             }
