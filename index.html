@@ -616,7 +616,7 @@
                     <div class="chain-source" id="l2_chain_source">
                         <div class="chain-source-item" draggable="true" data-id="l2-c3">Infrared radiation is absorbed by greenhouse gases</div>
                         <div class="chain-source-item" draggable="true" data-id="l2-c1">Fossil fuels are burned</div>
-                        <div class="chain-source-item" draggable="true" data-id="l2-c4">Earth's surface and lower atmosphere warm</div>
+                        <div class="chain-source-item" draggable="true" data-id="l2-c4">Earth's surface warms</div>
                         <div class="chain-source-item" draggable="true" data-id="l2-c2">Carbon dioxide is emitted into the atmosphere</div>
                     </div>
 
@@ -1337,6 +1337,24 @@
                 4: 'l4-c4'
             }
         };
+        let chainLabels = {
+            'l1-c1': 'The Industrial Revolution begins',
+            'l1-c2': 'Factories burn coal and oil',
+            'l1-c3': 'Carbon dioxide is released',
+            'l1-c4': 'Atmospheric CO₂ rises',
+            'l2-c1': 'Fossil fuels are burned',
+            'l2-c2': 'Carbon dioxide is emitted into the atmosphere',
+            'l2-c3': 'Infrared radiation is absorbed by greenhouse gases',
+            'l2-c4': "Earth's surface warms",
+            'l3-c1': 'Coal is burned for heating and power in London',
+            'l3-c2': 'High concentrations of nitrogen dioxide and sulphur dioxide accumulate',
+            'l3-c3': 'Smog traps pollutants over the city',
+            'l3-c4': 'Thousands of people experience respiratory problems and die',
+            'l4-c1': 'Global temperatures rise due to greenhouse gas emissions',
+            'l4-c2': 'Sea levels rise and flooding events increase',
+            'l4-c3': 'Urban heat island effect intensifies local temperatures',
+            'l4-c4': 'London faces water stress, heatwaves, and infrastructure challenges by 2050'
+        };
         let chainSlots = {
             'l1': {
                 1: null,
@@ -1471,8 +1489,9 @@
                 fb.textContent = '✓ Perfect! You got the causal chain correct!';
                 addPoint(chainKey);
             } else {
+                const correctOrder = [1, 2, 3, 4].map(i => `${i}) ${chainLabels[correct[i]]}`).join('<br>');
                 fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect order. Please review the causal sequence and try to understand: what causes what?';
+                fb.innerHTML = `❌ Incorrect order. The correct order was:<br>${correctOrder}`;
             }
 
             // Disable the button after checking
