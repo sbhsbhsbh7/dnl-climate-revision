@@ -1437,13 +1437,26 @@
                     const itemId = draggedElement.dataset.id;
                     const itemText = draggedElement.textContent;
 
-                    chainSlots[chainKey][slotNum] = { id: itemId, text: itemText };
+                    // Put back whatever was previously in this slot
+                    const previous = chainSlots[chainKey][slotNum];
+                    if (previous && previous.el) {
+                        previous.el.style.display = '';
+                    }
+
+                    // Hide the dragged item so it can't be used again elsewhere
+                    draggedElement.style.display = 'none';
+
+                    chainSlots[chainKey][slotNum] = { id: itemId, text: itemText, el: draggedElement };
                     renderSlot(chainKey, slotNum);
                 });
 
                 slot.addEventListener('click', e => {
                     const slotNum = parseInt(slot.dataset.slot);
-                    if (chainSlots[chainKey][slotNum]) {
+                    const current = chainSlots[chainKey][slotNum];
+                    if (current) {
+                        if (current.el) {
+                            current.el.style.display = '';
+                        }
                         chainSlots[chainKey][slotNum] = null;
                         renderSlot(chainKey, slotNum);
                     }
