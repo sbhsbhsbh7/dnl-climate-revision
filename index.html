@@ -69,6 +69,39 @@
             margin-top: 4px;
         }
 
+        .total-score-panel {
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 15px;
+            padding: 20px 15px;
+            margin-top: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .total-score-label {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .total-score-value {
+            display: inline-block;
+            background: linear-gradient(135deg, #2d4a3a, #1f3d2b);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 1.3em;
+            font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .total-score-arrow {
+            margin: 0 10px;
+            color: #c9a227;
+        }
+
         .tabs {
             display: flex;
             gap: 8px;
@@ -476,7 +509,7 @@
             <p class="subtitle">Climate Change</p>
             <p class="level">DNL SVT Terminale | M. LOUIS</p>
             <div class="score-display">
-                Lesson Score: <span class="score-value" id="score-display">0/6</span>
+                Lesson Score: <span class="score-value" id="score-display">0/10</span>
             </div>
         </header>
 
@@ -556,7 +589,7 @@
                         <div class="chain-source-item" draggable="true" data-id="l1-c2">Factories burn coal and oil</div>
                     </div>
 
-                    <button class="check-btn" onclick="checkChainOrder('l1')" id="btn_l1_chain">Check order</button>
+                    <button class="check-btn" onclick="checkChainOrder('l1', 'l1', 2.5)" id="btn_l1_chain">Check order</button>
                     <div class="feedback" id="fbL1Chain"></div>
                 </div>
 
@@ -646,7 +679,7 @@
                         <div class="chain-source-item" draggable="true" data-id="l2b-c2">The warmed Earth's surface emits infrared radiation</div>
                     </div>
 
-                    <button class="check-btn" onclick="checkChainOrder('l2b', 'l2')" id="btn_l2b_chain">Check order</button>
+                    <button class="check-btn" onclick="checkChainOrder('l2b', 'l2', 2.5)" id="btn_l2b_chain">Check order</button>
                     <div class="feedback" id="fbL2BChain"></div>
                 </div>
 
@@ -674,7 +707,7 @@
                         <div class="chain-source-item" draggable="true" data-id="l2-c2">Carbon dioxide is emitted into the atmosphere</div>
                     </div>
 
-                    <button class="check-btn" onclick="checkChainOrder('l2')" id="btn_l2_chain">Check order</button>
+                    <button class="check-btn" onclick="checkChainOrder('l2', 'l2', 2.5)" id="btn_l2_chain">Check order</button>
                     <div class="feedback" id="fbL2Chain"></div>
                 </div>
 
@@ -772,7 +805,7 @@
                         <div class="chain-source-item" draggable="true" data-id="l3-c5">Increased illness and deaths</div>
                     </div>
 
-                    <button class="check-btn" onclick="checkChainOrder('l3')" id="btn_l3_chain">Check order</button>
+                    <button class="check-btn" onclick="checkChainOrder('l3', 'l3', 2.5)" id="btn_l3_chain">Check order</button>
                     <div class="feedback" id="fbL3Chain"></div>
                 </div>
 
@@ -870,11 +903,20 @@
                         <div class="chain-source-item" draggable="true" data-category="heatwaves">Green roofs</div>
                     </div>
 
-                    <button class="check-btn" onclick="checkSortZones('l4')" id="btn_l4_sort">Check answers</button>
+                    <button class="check-btn" onclick="checkSortZones('l4', 4)" id="btn_l4_sort">Check answers</button>
                     <div class="feedback" id="fbL4Sort"></div>
                 </div>
 
             </div>
+        </div>
+
+        <div class="total-score-panel">
+            <p class="total-score-label">Total Score — All Lessons</p>
+            <p class="total-score-value">
+                <span id="total-score-40">0</span>/40
+                <span class="total-score-arrow">→</span>
+                <span id="total-score-20">0</span>/20
+            </p>
         </div>
 
     </div>
@@ -892,26 +934,44 @@
             l4: 0
         };
 
+        // Each lesson is scored out of 10. Points per question are weighted:
+        // simple fill-in/MCQ questions are worth less, and the more complex
+        // exercises (drag-to-order chains, the risk→solution sorting activity)
+        // are worth more.
         const maxScores = {
-            l1: 6,  // 5 questions + 1 chain
-            l2: 7,   // 5 questions + 2 chains
-            l3: 8,   // 7 questions + 1 chain
-            l4: 7    // 6 questions + 1 chain
+            l1: 10,
+            l2: 10,
+            l3: 10,
+            l4: 10
         };
 
         let currentLesson = 'l1';
 
+        function formatScore(n) {
+            return (Math.round(n * 100) / 100).toString();
+        }
+
         function updateScoreDisplay() {
             const total = scores[currentLesson];
             const max = maxScores[currentLesson];
-            document.getElementById('score-display').textContent = `${total}/${max}`;
+            document.getElementById('score-display').textContent = `${formatScore(total)}/${max}`;
         }
 
-        function addPoint(lesson) {
-            scores[lesson]++;
+        function updateTotalScoreDisplay() {
+            const total = scores.l1 + scores.l2 + scores.l3 + scores.l4;
+            const totalEl = document.getElementById('total-score-40');
+            const totalEl20 = document.getElementById('total-score-20');
+            if (totalEl) totalEl.textContent = formatScore(total);
+            if (totalEl20) totalEl20.textContent = formatScore(total / 2);
+        }
+
+        function addPoint(lesson, points) {
+            points = (typeof points === 'number') ? points : 1;
+            scores[lesson] = Math.round((scores[lesson] + points) * 100) / 100;
             if (lesson === currentLesson) {
                 updateScoreDisplay();
             }
+            updateTotalScoreDisplay();
         }
 
         function disableQuestion(inputId, btnId) {
@@ -945,7 +1005,7 @@
         }
 
         // Check radio
-        function checkRadio(name, correct, feedbackId) {
+        function checkRadio(name, correct, feedbackId, points) {
             const selected = document.querySelector(`input[name="${name}"]:checked`);
             const fb = document.getElementById(feedbackId);
             const btnId = `btn_${name}`;
@@ -959,7 +1019,7 @@
             if (selected.value === correct) {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Correct!';
-                addPoint(currentLesson);
+                addPoint(currentLesson, points);
                 disableRadios(name);
                 document.getElementById(btnId).disabled = true;
             } else {
@@ -1121,7 +1181,7 @@
                 (val.includes('damag') || val.includes('harm') || val.includes('affect') || val.includes('cause') || val.includes('ill'))) {
                 fb.className = 'feedback correct';
                 fb.innerHTML = '✓ Excellent! You explained the cause-effect chain.<br><strong>Sample:</strong> "Pollutants from smog enter the lungs when people breathe. This damages the respiratory system, causing bronchitis and asthma."';
-                addPoint('l3');
+                addPoint('l3', 1.5);
                 disableQuestion('l3_q7', 'btn_l3_q7');
             } else {
                 fb.className = 'feedback incorrect';
@@ -1243,7 +1303,7 @@
             if (val === 'coal') {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Correct: coal';
-                addPoint('l1');
+                addPoint('l1', 1.5);
                 disableQuestion('l1_q1', 'btn_l1_q1');
             } else {
                 fb.className = 'feedback incorrect';
@@ -1258,7 +1318,7 @@
             if (val === 'oil') {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Correct: oil';
-                addPoint('l1');
+                addPoint('l1', 1.5);
                 disableQuestion('l1_q2', 'btn_l1_q2');
             } else {
                 fb.className = 'feedback incorrect';
@@ -1273,7 +1333,7 @@
             if (val.includes('steam engine')) {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Correct: steam engine';
-                addPoint('l1');
+                addPoint('l1', 1.5);
                 disableQuestion('l1_q3', 'btn_l1_q3');
             } else {
                 fb.className = 'feedback incorrect';
@@ -1288,7 +1348,7 @@
             if (val === 'emission' || val === 'emissions') {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Correct: emission(s)';
-                addPoint('l1');
+                addPoint('l1', 1.5);
                 disableQuestion('l1_q4', 'btn_l1_q4');
             } else {
                 fb.className = 'feedback incorrect';
@@ -1303,7 +1363,7 @@
             if (val === 'combustion') {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Correct: combustion';
-                addPoint('l1');
+                addPoint('l1', 1.5);
                 disableQuestion('l1_q5', 'btn_l1_q5');
             } else {
                 fb.className = 'feedback incorrect';
@@ -1524,7 +1584,7 @@
             });
         }
 
-        function checkSortZones(key) {
+        function checkSortZones(key, points) {
             const sourceEl = document.getElementById(`${key}_sort_source`);
             const displayEl = document.getElementById(`${key}_sort_display`);
             const fb = document.getElementById(`fb${key.toUpperCase()}Sort`);
@@ -1551,7 +1611,7 @@
             if (allCorrect) {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Perfect! All solutions are correctly sorted.';
-                addPoint(key);
+                addPoint(key, points);
             } else {
                 const byCategory = {};
                 displayEl.querySelectorAll('.sort-zone').forEach(zone => {
@@ -1576,7 +1636,7 @@
             });
         }
 
-        function checkChainOrder(chainKey, lessonKey) {
+        function checkChainOrder(chainKey, lessonKey, points) {
             lessonKey = lessonKey || chainKey;
             const fb = document.getElementById(`fb${chainKey.toUpperCase()}Chain`);
             const btnId = `btn_${chainKey}_chain`;
@@ -1603,7 +1663,7 @@
             if (isCorrect) {
                 fb.className = 'feedback correct';
                 fb.textContent = '✓ Perfect! You got the causal chain correct!';
-                addPoint(lessonKey);
+                addPoint(lessonKey, points);
             } else {
                 const orderNums = [];
                 for (let i = 1; i <= slotCount; i++) orderNums.push(i);
