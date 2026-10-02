@@ -786,38 +786,31 @@
                 </div>
 
                 <div class="exercise">
-                    <p><strong>7. Complete the sentence:</strong></p>
-                    <p style="margin-top: 12px;">"Green infrastructure and sustainable urban planning must _____ now to protect London from future climate impacts."</p>
-                    <input type="text" id="l4_q8" placeholder="">
-                    <button class="check-btn" onclick="checkL4Q8()" id="btn_l4_q8">Check</button>
-                    <div class="feedback" id="fbL4Q8"></div>
-                </div>
-
-<div class="exercise">
-                    <p><strong>8. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+                    <p><strong>7. Match each climate challenge to its adaptation solution for London by 2050:</strong></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Drag each solution into the box next to the matching challenge ↓</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l4_chain_display">
+                            <p style="font-weight: 700; margin-bottom: 6px;">Heatwaves</p>
                             <div class="chain-slot" data-slot="1"></div>
-                            <div class="chain-arrow">↓</div>
+                            <p style="font-weight: 700; margin: 16px 0 6px;">Rising sea levels &amp; flooding</p>
                             <div class="chain-slot" data-slot="2"></div>
-                            <div class="chain-arrow">↓</div>
+                            <p style="font-weight: 700; margin: 16px 0 6px;">Urban heat island effect</p>
                             <div class="chain-slot" data-slot="3"></div>
-                            <div class="chain-arrow">↓</div>
+                            <p style="font-weight: 700; margin: 16px 0 6px;">Water stress</p>
                             <div class="chain-slot" data-slot="4"></div>
                         </div>
                     </div>
 
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available solutions (drag to the boxes above):</strong></p>
                     <div class="chain-source" id="l4_chain_source">
-                        <div class="chain-source-item" draggable="true" data-id="l4-c3">Urban heat island effect intensifies local temperatures</div>
-                        <div class="chain-source-item" draggable="true" data-id="l4-c1">Global temperatures rise due to greenhouse gas emissions</div>
-                        <div class="chain-source-item" draggable="true" data-id="l4-c2">Sea levels rise and flooding events increase</div>
-                        <div class="chain-source-item" draggable="true" data-id="l4-c4">London faces water stress, heatwaves, and infrastructure challenges by 2050</div>
+                        <div class="chain-source-item" draggable="true" data-id="l4-c3">More parks, green roofs and tree planting across the city</div>
+                        <div class="chain-source-item" draggable="true" data-id="l4-c1">Early-warning systems and cooling centres for vulnerable people</div>
+                        <div class="chain-source-item" draggable="true" data-id="l4-c2">Reinforced flood barriers and improved drainage along the Thames</div>
+                        <div class="chain-source-item" draggable="true" data-id="l4-c4">Rainwater harvesting and stricter water-use regulations</div>
                     </div>
 
-                    <button class="check-btn" onclick="checkChainOrder('l4')" id="btn_l4_chain">Check order</button>
+                    <button class="check-btn" onclick="checkChainOrder('l4')" id="btn_l4_chain">Check answers</button>
                     <div class="feedback" id="fbL4Chain"></div>
                 </div>
 
@@ -1183,21 +1176,6 @@
             }
         }
 
-        function checkL4Q8() {
-            const val = document.getElementById('l4_q8').value.toLowerCase().trim();
-            const fb = document.getElementById('fbL4Q8');
-            if (val === 'be implemented' || val === 'begin' || val === 'be developed') {
-                fb.className = 'feedback correct';
-                fb.textContent = '✓ Correct: be implemented (or begin/be developed)';
-                addPoint('l4');
-                disableQuestion('l4_q8', 'btn_l4_q8');
-            } else {
-                fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>be implemented</strong>';
-                disableQuestion('l4_q8', 'btn_l4_q8');
-            }
-        }
-
         // LESSON 1 CHECKS
         function checkL1Q1() {
             const val = document.getElementById('l1_q1').value.toLowerCase().trim();
@@ -1324,10 +1302,10 @@
             'l3-c3': 'Human exposure',
             'l3-c4': 'Respiratory & cardiovascular effects',
             'l3-c5': 'Increased illness and deaths',
-            'l4-c1': 'Global temperatures rise due to greenhouse gas emissions',
-            'l4-c2': 'Sea levels rise and flooding events increase',
-            'l4-c3': 'Urban heat island effect intensifies local temperatures',
-            'l4-c4': 'London faces water stress, heatwaves, and infrastructure challenges by 2050',
+            'l4-c1': 'Early-warning systems and cooling centres for vulnerable people',
+            'l4-c2': 'Reinforced flood barriers and improved drainage along the Thames',
+            'l4-c3': 'More parks, green roofs and tree planting across the city',
+            'l4-c4': 'Rainwater harvesting and stricter water-use regulations',
             'l2b-c1': "The Sun sends out rays, part of which is absorbed by the Earth's surface",
             'l2b-c2': "The warmed Earth's surface emits infrared radiation",
             'l2b-c3': "The infrared radiation is absorbed and re-emitted in all directions, including back towards the Earth's surface",
