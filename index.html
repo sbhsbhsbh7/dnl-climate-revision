@@ -414,6 +414,53 @@
             opacity: 0.7;
         }
 
+        /* Sorting / categorizing exercise */
+        .sort-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .sort-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .sort-zone {
+            border: 3px dashed #2d4a3a;
+            border-radius: 8px;
+            padding: 12px;
+            min-height: 90px;
+            background: white;
+            transition: all 0.3s;
+        }
+
+        .sort-zone.dragover {
+            background: #eef2ee;
+            border-color: #6b6f47;
+        }
+
+        .sort-zone-label {
+            font-weight: 700;
+            color: #2d4a3a;
+            margin-bottom: 8px;
+        }
+
+        .sort-zone-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            min-height: 40px;
+        }
+
+        .sort-zone-items .chain-source-item {
+            cursor: pointer;
+            font-size: 0.85em;
+            padding: 8px 10px;
+        }
+
         footer {
             text-align: center;
             color: white;
@@ -754,8 +801,8 @@
                 </div>
 
                 <div class="exercise">
-                    <p><strong>3. Fill in with the correct word:</strong></p>
-                    <p style="margin-top: 12px;">A phenomenon where urban areas experience higher temperatures than surrounding rural areas is called the urban _____ island.</p>
+                    <p><strong>3. Fill in with the correct words:</strong></p>
+                    <p style="margin-top: 12px;">A phenomenon where urban areas experience higher temperatures than surrounding rural areas is called the _____.</p>
                     <input type="text" id="l4_q3" placeholder="">
                     <button class="check-btn" onclick="checkL4Q3()" id="btn_l4_q3">Check</button>
                     <div class="feedback" id="fbL4Q3"></div>
@@ -763,7 +810,7 @@
 
                 <div class="exercise">
                     <p><strong>4. Fill in with the correct word:</strong></p>
-                    <p style="margin-top: 12px;">The scarcity of freshwater resources, insufficient for human needs and ecosystems, is called _____.</p>
+                    <p style="margin-top: 12px;">When there is not enough water available for people and ecosystems, this situation is called _____.</p>
                     <input type="text" id="l4_q4" placeholder="">
                     <button class="check-btn" onclick="checkL4Q4()" id="btn_l4_q4">Check</button>
                     <div class="feedback" id="fbL4Q4"></div>
@@ -771,7 +818,7 @@
 
 <div class="exercise">
                     <p><strong>5. Fill in with the correct word:</strong></p>
-                    <p style="margin-top: 12px;">"Rising sea levels _____ (menace) London's infrastructure, including subway systems and coastal defenses, by 2050."</p>
+                    <p style="margin-top: 12px;">"Rising sea levels _____ (French: menace) London's infrastructure, including subway systems and coastal defenses, by 2050."</p>
                     <input type="text" id="l4_q5" placeholder="">
                     <button class="check-btn" onclick="checkL4Q5()" id="btn_l4_q5">Check</button>
                     <div class="feedback" id="fbL4Q5"></div>
@@ -786,32 +833,46 @@
                 </div>
 
                 <div class="exercise">
-                    <p><strong>7. Match each climate challenge to its adaptation solution for London by 2050:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Drag each solution into the box next to the matching challenge ↓</p>
+                    <p><strong>7. Sort each solution into the climate challenge it helps solve:</strong></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Drag each solution below into the correct box ↓</p>
 
-                    <div class="chain-container">
-                        <div class="chain-display" id="l4_chain_display">
-                            <p style="font-weight: 700; margin-bottom: 6px;">Heatwaves</p>
-                            <div class="chain-slot" data-slot="1"></div>
-                            <p style="font-weight: 700; margin: 16px 0 6px;">Rising sea levels &amp; flooding</p>
-                            <div class="chain-slot" data-slot="2"></div>
-                            <p style="font-weight: 700; margin: 16px 0 6px;">Urban heat island effect</p>
-                            <div class="chain-slot" data-slot="3"></div>
-                            <p style="font-weight: 700; margin: 16px 0 6px;">Water stress</p>
-                            <div class="chain-slot" data-slot="4"></div>
+                    <div class="sort-container" id="l4_sort_display">
+                        <div class="sort-zone" data-category="water-stress">
+                            <p class="sort-zone-label">Water stress</p>
+                            <div class="sort-zone-items"></div>
+                        </div>
+                        <div class="sort-zone" data-category="heatwaves">
+                            <p class="sort-zone-label">Heatwaves</p>
+                            <div class="sort-zone-items"></div>
+                        </div>
+                        <div class="sort-zone" data-category="sea-level-rise">
+                            <p class="sort-zone-label">Sea-level rise</p>
+                            <div class="sort-zone-items"></div>
+                        </div>
+                        <div class="sort-zone" data-category="flooding">
+                            <p class="sort-zone-label">Flooding</p>
+                            <div class="sort-zone-items"></div>
                         </div>
                     </div>
 
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available solutions (drag to the boxes above):</strong></p>
-                    <div class="chain-source" id="l4_chain_source">
-                        <div class="chain-source-item" draggable="true" data-id="l4-c3">More parks, green roofs and tree planting across the city</div>
-                        <div class="chain-source-item" draggable="true" data-id="l4-c1">Early-warning systems and cooling centres for vulnerable people</div>
-                        <div class="chain-source-item" draggable="true" data-id="l4-c2">Reinforced flood barriers and improved drainage along the Thames</div>
-                        <div class="chain-source-item" draggable="true" data-id="l4-c4">Rainwater harvesting and stricter water-use regulations</div>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available solutions (drag to a box above, click a placed item to send it back):</strong></p>
+                    <div class="chain-source" id="l4_sort_source">
+                        <div class="chain-source-item" draggable="true" data-category="water-stress">Rainwater harvesting</div>
+                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Trees</div>
+                        <div class="chain-source-item" draggable="true" data-category="sea-level-rise">Thames Barrier</div>
+                        <div class="chain-source-item" draggable="true" data-category="flooding">Green infrastructure solutions (rain gardens, wetlands…)</div>
+                        <div class="chain-source-item" draggable="true" data-category="water-stress">Leak repair</div>
+                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Shade</div>
+                        <div class="chain-source-item" draggable="true" data-category="sea-level-rise">Higher river walls</div>
+                        <div class="chain-source-item" draggable="true" data-category="flooding">Permeable paving</div>
+                        <div class="chain-source-item" draggable="true" data-category="water-stress">Efficient taps</div>
+                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Cool spaces</div>
+                        <div class="chain-source-item" draggable="true" data-category="sea-level-rise">Long-term planning</div>
+                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Green roofs</div>
                     </div>
 
-                    <button class="check-btn" onclick="checkChainOrder('l4')" id="btn_l4_chain">Check answers</button>
-                    <div class="feedback" id="fbL4Chain"></div>
+                    <button class="check-btn" onclick="checkSortZones('l4')" id="btn_l4_sort">Check answers</button>
+                    <div class="feedback" id="fbL4Sort"></div>
                 </div>
 
             </div>
@@ -1119,14 +1180,14 @@
         function checkL4Q3() {
             const val = document.getElementById('l4_q3').value.toLowerCase().trim();
             const fb = document.getElementById('fbL4Q3');
-            if (val === 'heat') {
+            if (val === 'urban heat island' || val === 'urban heat island effect' || val === 'heat island') {
                 fb.className = 'feedback correct';
-                fb.textContent = '✓ Correct: heat';
+                fb.textContent = '✓ Correct: urban heat island';
                 addPoint('l4');
                 disableQuestion('l4_q3', 'btn_l4_q3');
             } else {
                 fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>heat</strong>';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>urban heat island</strong>';
                 disableQuestion('l4_q3', 'btn_l4_q3');
             }
         }
@@ -1275,12 +1336,6 @@
                 4: 'l3-c4',
                 5: 'l3-c5'
             },
-            'l4': {
-                1: 'l4-c1',
-                2: 'l4-c2',
-                3: 'l4-c3',
-                4: 'l4-c4'
-            },
             'l2b': {
                 1: 'l2b-c1',
                 2: 'l2b-c2',
@@ -1302,10 +1357,6 @@
             'l3-c3': 'Human exposure',
             'l3-c4': 'Respiratory & cardiovascular effects',
             'l3-c5': 'Increased illness and deaths',
-            'l4-c1': 'Early-warning systems and cooling centres for vulnerable people',
-            'l4-c2': 'Reinforced flood barriers and improved drainage along the Thames',
-            'l4-c3': 'More parks, green roofs and tree planting across the city',
-            'l4-c4': 'Rainwater harvesting and stricter water-use regulations',
             'l2b-c1': "The Sun sends out rays, part of which is absorbed by the Earth's surface",
             'l2b-c2': "The warmed Earth's surface emits infrared radiation",
             'l2b-c3': "The infrared radiation is absorbed and re-emitted in all directions, including back towards the Earth's surface",
@@ -1331,12 +1382,6 @@
                 4: null,
                 5: null
             },
-            'l4': {
-                1: null,
-                2: null,
-                3: null,
-                4: null
-            },
             'l2b': {
                 1: null,
                 2: null,
@@ -1349,8 +1394,8 @@
             setupSlotDragDrop('l1');
             setupSlotDragDrop('l2');
             setupSlotDragDrop('l3');
-            setupSlotDragDrop('l4');
             setupSlotDragDrop('l2b');
+            setupSortZones('l4');
         }
 
         function setupSlotDragDrop(chainKey) {
@@ -1437,6 +1482,99 @@
                 slot.classList.remove('filled');
                 slot.style.cursor = 'drop';
             }
+        }
+
+        // SORTING / CATEGORIZING EXERCISE (lesson 4, question 7)
+        function setupSortZones(key) {
+            const sourceEl = document.getElementById(`${key}_sort_source`);
+            const displayEl = document.getElementById(`${key}_sort_display`);
+            if (!sourceEl || !displayEl) return;
+
+            function attachItemHandlers(item) {
+                item.addEventListener('dragstart', e => {
+                    draggedElement = item;
+                    item.style.opacity = '0.5';
+                });
+                item.addEventListener('dragend', e => {
+                    item.style.opacity = '1';
+                });
+                item.addEventListener('click', e => {
+                    if (item.parentElement && item.parentElement.classList.contains('sort-zone-items')) {
+                        sourceEl.appendChild(item);
+                    }
+                });
+            }
+
+            sourceEl.querySelectorAll('.chain-source-item').forEach(attachItemHandlers);
+
+            displayEl.querySelectorAll('.sort-zone').forEach(zone => {
+                const dropArea = zone.querySelector('.sort-zone-items');
+                zone.addEventListener('dragover', e => {
+                    e.preventDefault();
+                    zone.classList.add('dragover');
+                });
+                zone.addEventListener('dragleave', e => {
+                    zone.classList.remove('dragover');
+                });
+                zone.addEventListener('drop', e => {
+                    e.preventDefault();
+                    zone.classList.remove('dragover');
+                    if (!draggedElement) return;
+                    dropArea.appendChild(draggedElement);
+                });
+            });
+        }
+
+        function checkSortZones(key) {
+            const sourceEl = document.getElementById(`${key}_sort_source`);
+            const displayEl = document.getElementById(`${key}_sort_display`);
+            const fb = document.getElementById(`fb${key.toUpperCase()}Sort`);
+            const btn = document.getElementById(`btn_${key}_sort`);
+
+            if (sourceEl.querySelectorAll('.chain-source-item').length > 0) {
+                fb.className = 'feedback incorrect';
+                fb.textContent = '❌ Please sort all the solutions into a box first.';
+                return;
+            }
+
+            let allCorrect = true;
+            const mistakes = [];
+            displayEl.querySelectorAll('.sort-zone').forEach(zone => {
+                const category = zone.dataset.category;
+                zone.querySelectorAll('.chain-source-item').forEach(item => {
+                    if (item.dataset.category !== category) {
+                        allCorrect = false;
+                        mistakes.push(item.textContent.trim());
+                    }
+                });
+            });
+
+            if (allCorrect) {
+                fb.className = 'feedback correct';
+                fb.textContent = '✓ Perfect! All solutions are correctly sorted.';
+                addPoint(key);
+            } else {
+                const byCategory = {};
+                displayEl.querySelectorAll('.sort-zone').forEach(zone => {
+                    byCategory[zone.dataset.category] = zone.querySelector('.sort-zone-label').textContent;
+                });
+                const correctGroups = {};
+                [...displayEl.querySelectorAll('.chain-source-item'), ...sourceEl.querySelectorAll('.chain-source-item')].forEach(item => {
+                    const cat = item.dataset.category;
+                    if (!correctGroups[cat]) correctGroups[cat] = [];
+                    correctGroups[cat].push(item.textContent.trim());
+                });
+                const summary = Object.keys(byCategory).map(cat => `<strong>${byCategory[cat]}:</strong> ${correctGroups[cat].join(', ')}`).join('<br>');
+                fb.className = 'feedback incorrect';
+                fb.innerHTML = `❌ Some solutions are in the wrong box. Here is the correct sorting:<br>${summary}`;
+            }
+
+            if (btn) btn.disabled = true;
+            displayEl.querySelectorAll('.chain-source-item').forEach(item => {
+                item.draggable = false;
+                item.style.cursor = 'not-allowed';
+                item.style.pointerEvents = 'none';
+            });
         }
 
         function checkChainOrder(chainKey, lessonKey) {
