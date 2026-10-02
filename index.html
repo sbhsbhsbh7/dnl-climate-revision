@@ -818,7 +818,7 @@
 
 <div class="exercise">
                     <p><strong>5. Fill in with the correct word:</strong></p>
-                    <p style="margin-top: 12px;">"Rising sea levels _____ (French: menace) London's infrastructure, including subway systems and coastal defenses, by 2050."</p>
+                    <p style="margin-top: 12px;">"Today, rising sea levels are a serious _____ (French: menace) to London's infrastructure, including subway systems and coastal defenses."</p>
                     <input type="text" id="l4_q5" placeholder="">
                     <button class="check-btn" onclick="checkL4Q5()" id="btn_l4_q5">Check</button>
                     <div class="feedback" id="fbL4Q5"></div>
@@ -1209,14 +1209,14 @@
         function checkL4Q5() {
             const val = document.getElementById('l4_q5').value.toLowerCase().trim();
             const fb = document.getElementById('fbL4Q5');
-            if (val === 'threaten' || val === 'threatens') {
+            if (val === 'threat' || val === 'threats') {
                 fb.className = 'feedback correct';
-                fb.textContent = '✓ Correct: threaten (or threatens with "is")';
+                fb.textContent = '✓ Correct: threat (or threats)';
                 addPoint('l4');
                 disableQuestion('l4_q5', 'btn_l4_q5');
             } else {
                 fb.className = 'feedback incorrect';
-                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>threaten</strong>';
+                fb.innerHTML = '❌ Incorrect. The correct answer is: <strong>threat</strong> (or threats)';
                 disableQuestion('l4_q5', 'btn_l4_q5');
             }
         }
