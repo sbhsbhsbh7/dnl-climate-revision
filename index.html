@@ -1481,7 +1481,20 @@
         // null). onDrop(dropEl, item) performs the actual placement.
         function setupTouchDrag(item, getDropTarget, onDrop) {
             let startX = 0, startY = 0, dragging = false, ghost = null;
+            let ghostW = 0, ghostH = 0, pendingX = 0, pendingY = 0, rafId = null;
             const THRESHOLD = 10;
+
+            function moveGhostTo(x, y) {
+                pendingX = x;
+                pendingY = y;
+                if (rafId) return;
+                rafId = requestAnimationFrame(() => {
+                    rafId = null;
+                    if (ghost) {
+                        ghost.style.transform = `translate3d(${pendingX - ghostW / 2}px, ${pendingY - ghostH / 2}px, 0)`;
+                    }
+                });
+            }
 
             item.addEventListener('touchstart', e => {
                 if (item.style.display === 'none' || !e.touches.length) return;
@@ -1503,30 +1516,38 @@
                         selectedItem = null;
                     }
                     const rect = item.getBoundingClientRect();
+                    ghostW = rect.width;
+                    ghostH = rect.height;
                     ghost = item.cloneNode(true);
                     ghost.style.position = 'fixed';
-                    ghost.style.left = rect.left + 'px';
-                    ghost.style.top = rect.top + 'px';
-                    ghost.style.width = rect.width + 'px';
+                    ghost.style.left = '0';
+                    ghost.style.top = '0';
+                    ghost.style.width = ghostW + 'px';
                     ghost.style.margin = '0';
                     ghost.style.pointerEvents = 'none';
                     ghost.style.zIndex = '9999';
                     ghost.style.opacity = '0.95';
+                    ghost.style.transition = 'none';
+                    ghost.style.willChange = 'transform';
                     ghost.style.boxShadow = '0 10px 25px rgba(0,0,0,0.35)';
+                    ghost.style.transform = `translate3d(${rect.left}px, ${rect.top}px, 0)`;
                     document.body.appendChild(ghost);
                     item.style.opacity = '0.3';
                 }
 
                 if (dragging) {
                     e.preventDefault();
-                    ghost.style.left = (t.clientX - ghost.offsetWidth / 2) + 'px';
-                    ghost.style.top = (t.clientY - ghost.offsetHeight / 2) + 'px';
+                    moveGhostTo(t.clientX, t.clientY);
                 }
             }, { passive: false });
 
             item.addEventListener('touchend', e => {
                 if (!dragging) return;
                 dragging = false;
+                if (rafId) {
+                    cancelAnimationFrame(rafId);
+                    rafId = null;
+                }
                 if (ghost) {
                     ghost.remove();
                     ghost = null;
