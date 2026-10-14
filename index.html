@@ -1474,6 +1474,73 @@
             setupSortZones('l4');
         }
 
+        // Real finger-drag support (in addition to tap-to-select/tap-to-place).
+        // Some users instinctively try to physically drag the card with their
+        // finger instead of doing two separate taps — this makes that work too.
+        // getDropTarget(el) returns the valid drop element under the finger (or
+        // null). onDrop(dropEl, item) performs the actual placement.
+        function setupTouchDrag(item, getDropTarget, onDrop) {
+            let startX = 0, startY = 0, dragging = false, ghost = null;
+            const THRESHOLD = 10;
+
+            item.addEventListener('touchstart', e => {
+                if (item.style.display === 'none' || !e.touches.length) return;
+                startX = e.touches[0].clientX;
+                startY = e.touches[0].clientY;
+                dragging = false;
+            }, { passive: true });
+
+            item.addEventListener('touchmove', e => {
+                if (!e.touches.length) return;
+                const t = e.touches[0];
+                const dx = t.clientX - startX;
+                const dy = t.clientY - startY;
+
+                if (!dragging && Math.hypot(dx, dy) > THRESHOLD) {
+                    dragging = true;
+                    if (selectedItem) {
+                        selectedItem.classList.remove('selected');
+                        selectedItem = null;
+                    }
+                    const rect = item.getBoundingClientRect();
+                    ghost = item.cloneNode(true);
+                    ghost.style.position = 'fixed';
+                    ghost.style.left = rect.left + 'px';
+                    ghost.style.top = rect.top + 'px';
+                    ghost.style.width = rect.width + 'px';
+                    ghost.style.margin = '0';
+                    ghost.style.pointerEvents = 'none';
+                    ghost.style.zIndex = '9999';
+                    ghost.style.opacity = '0.95';
+                    ghost.style.boxShadow = '0 10px 25px rgba(0,0,0,0.35)';
+                    document.body.appendChild(ghost);
+                    item.style.opacity = '0.3';
+                }
+
+                if (dragging) {
+                    e.preventDefault();
+                    ghost.style.left = (t.clientX - ghost.offsetWidth / 2) + 'px';
+                    ghost.style.top = (t.clientY - ghost.offsetHeight / 2) + 'px';
+                }
+            }, { passive: false });
+
+            item.addEventListener('touchend', e => {
+                if (!dragging) return;
+                dragging = false;
+                if (ghost) {
+                    ghost.remove();
+                    ghost = null;
+                }
+                item.style.opacity = '1';
+                const t = e.changedTouches[0];
+                const under = document.elementFromPoint(t.clientX, t.clientY);
+                const dropEl = under ? getDropTarget(under) : null;
+                if (dropEl) {
+                    onDrop(dropEl, item);
+                }
+            });
+        }
+
         function placeItemInSlot(chainKey, slotNum, itemEl) {
             const itemId = itemEl.dataset.id;
             const itemText = itemEl.textContent;
@@ -1512,6 +1579,16 @@
                         item.classList.add('selected');
                     }
                 });
+
+                // Also support literally dragging the card with a finger
+                setupTouchDrag(
+                    item,
+                    el => el.closest('.chain-slot'),
+                    (slotEl, draggedItem) => {
+                        const slotNum = parseInt(slotEl.dataset.slot);
+                        placeItemInSlot(chainKey, slotNum, draggedItem);
+                    }
+                );
             });
 
             // Setup slots: tap/click to place the selected item, or to clear
@@ -1585,6 +1662,17 @@
                         item.classList.add('selected');
                     }
                 });
+
+                // Also support literally dragging the card with a finger
+                setupTouchDrag(
+                    item,
+                    el => el.closest('.sort-zone'),
+                    (zoneEl, draggedItem) => {
+                        const dropArea = zoneEl.querySelector('.sort-zone-items');
+                        draggedItem.classList.remove('selected');
+                        dropArea.appendChild(draggedItem);
+                    }
+                );
             }
 
             sourceEl.querySelectorAll('.chain-source-item').forEach(attachItemHandlers);
