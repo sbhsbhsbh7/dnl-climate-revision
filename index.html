@@ -447,6 +447,12 @@
             opacity: 0.7;
         }
 
+        .chain-source-item.selected {
+            border-color: #c9a227;
+            box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.35);
+            opacity: 0.85;
+        }
+
         /* Sorting / categorizing exercise */
         .sort-container {
             display: grid;
@@ -567,7 +573,7 @@
 
                 <div class="exercise">
                     <p><strong>6. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l1_chain_display">
@@ -657,7 +663,7 @@
 
                 <div class="exercise">
                     <p><strong>6. Put the steps of the greenhouse effect mechanism in the correct order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each step into the correct box ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each step into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l2b_chain_display">
@@ -685,7 +691,7 @@
 
 <div class="exercise">
                     <p><strong>7. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l2_chain_display">
@@ -780,7 +786,7 @@
 
 <div class="exercise">
                     <p><strong>8. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l3_chain_display">
@@ -867,7 +873,7 @@
 
                 <div class="exercise">
                     <p><strong>7. Sort each solution into the climate challenge it helps solve:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Drag each solution below into the correct box ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Drag each solution below into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
 
                     <div class="sort-container" id="l4_sort_display">
                         <div class="sort-zone" data-category="water-stress">
@@ -1374,7 +1380,8 @@
 
 
         // DRAG & DROP CHAIN LOGIC WITH SLOTS
-        let draggedElement = null;
+        let draggedElement = null; // native HTML5 drag-and-drop (desktop mouse)
+        let selectedItem = null;   // tap-to-select / tap-to-place (mobile/touch)
         let chainData = {
             'l1': {
                 1: 'l1-c1',
@@ -1457,6 +1464,24 @@
             setupSortZones('l4');
         }
 
+        function placeItemInSlot(chainKey, slotNum, itemEl) {
+            const itemId = itemEl.dataset.id;
+            const itemText = itemEl.textContent;
+
+            // Put back whatever was previously in this slot
+            const previous = chainSlots[chainKey][slotNum];
+            if (previous && previous.el) {
+                previous.el.style.display = '';
+            }
+
+            // Hide the placed item so it can't be used again elsewhere
+            itemEl.classList.remove('selected');
+            itemEl.style.display = 'none';
+
+            chainSlots[chainKey][slotNum] = { id: itemId, text: itemText, el: itemEl };
+            renderSlot(chainKey, slotNum);
+        }
+
         function setupSlotDragDrop(chainKey) {
             const displayEl = document.getElementById(`${chainKey}_chain_display`);
             const sourceEl = document.getElementById(`${chainKey}_chain_source`);
@@ -1465,12 +1490,26 @@
 
             // Setup source items
             document.querySelectorAll(`#${chainKey}_chain_source .chain-source-item`).forEach(item => {
+                // Desktop: native HTML5 drag and drop
                 item.addEventListener('dragstart', e => {
                     draggedElement = item;
                     item.style.opacity = '0.5';
                 });
                 item.addEventListener('dragend', e => {
                     item.style.opacity = '1';
+                    draggedElement = null;
+                });
+
+                // Mobile/touch fallback: tap to select, then tap a box to place it
+                item.addEventListener('click', e => {
+                    if (selectedItem === item) {
+                        item.classList.remove('selected');
+                        selectedItem = null;
+                    } else {
+                        if (selectedItem) selectedItem.classList.remove('selected');
+                        selectedItem = item;
+                        item.classList.add('selected');
+                    }
                 });
             });
 
@@ -1495,24 +1534,21 @@
                     if (!draggedElement) return;
 
                     const slotNum = parseInt(slot.dataset.slot);
-                    const itemId = draggedElement.dataset.id;
-                    const itemText = draggedElement.textContent;
-
-                    // Put back whatever was previously in this slot
-                    const previous = chainSlots[chainKey][slotNum];
-                    if (previous && previous.el) {
-                        previous.el.style.display = '';
-                    }
-
-                    // Hide the dragged item so it can't be used again elsewhere
-                    draggedElement.style.display = 'none';
-
-                    chainSlots[chainKey][slotNum] = { id: itemId, text: itemText, el: draggedElement };
-                    renderSlot(chainKey, slotNum);
+                    placeItemInSlot(chainKey, slotNum, draggedElement);
+                    draggedElement = null;
                 });
 
                 slot.addEventListener('click', e => {
                     const slotNum = parseInt(slot.dataset.slot);
+
+                    // Tap mode: a source item is selected, place it here
+                    if (selectedItem) {
+                        placeItemInSlot(chainKey, slotNum, selectedItem);
+                        selectedItem = null;
+                        return;
+                    }
+
+                    // No selection: tapping a filled slot clears it
                     const current = chainSlots[chainKey][slotNum];
                     if (current) {
                         if (current.el) {
@@ -1550,16 +1586,34 @@
             if (!sourceEl || !displayEl) return;
 
             function attachItemHandlers(item) {
+                // Desktop: native HTML5 drag and drop
                 item.addEventListener('dragstart', e => {
                     draggedElement = item;
                     item.style.opacity = '0.5';
                 });
                 item.addEventListener('dragend', e => {
                     item.style.opacity = '1';
+                    draggedElement = null;
                 });
+
+                // Mobile/touch fallback: tap to select / tap a placed item to send it back
                 item.addEventListener('click', e => {
+                    e.stopPropagation();
                     if (item.parentElement && item.parentElement.classList.contains('sort-zone-items')) {
+                        if (selectedItem === item) {
+                            item.classList.remove('selected');
+                            selectedItem = null;
+                        }
                         sourceEl.appendChild(item);
+                        return;
+                    }
+                    if (selectedItem === item) {
+                        item.classList.remove('selected');
+                        selectedItem = null;
+                    } else {
+                        if (selectedItem) selectedItem.classList.remove('selected');
+                        selectedItem = item;
+                        item.classList.add('selected');
                     }
                 });
             }
@@ -1580,6 +1634,15 @@
                     zone.classList.remove('dragover');
                     if (!draggedElement) return;
                     dropArea.appendChild(draggedElement);
+                    draggedElement = null;
+                });
+
+                // Mobile/touch fallback: tap a box to drop the selected item here
+                zone.addEventListener('click', e => {
+                    if (!selectedItem) return;
+                    dropArea.appendChild(selectedItem);
+                    selectedItem.classList.remove('selected');
+                    selectedItem = null;
                 });
             });
         }
