@@ -391,6 +391,29 @@
             color: white;
             border: 3px solid #2d4a3a;
             font-weight: 500;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .slot-text {
+            flex: 1;
+        }
+
+        .slot-remove {
+            flex-shrink: 0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+            font-weight: 700;
+            font-size: 1em;
+        }
+
+        .slot-remove:active {
+            background: rgba(255, 255, 255, 0.45);
         }
 
         .chain-slot:hover {
@@ -508,7 +531,24 @@
         .sort-zone-items .chain-source-item {
             cursor: pointer;
             font-size: 0.85em;
-            padding: 8px 10px;
+            padding: 8px 28px 8px 10px;
+            position: relative;
+        }
+
+        .sort-zone-items .chain-source-item::after {
+            content: "✕";
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
         }
 
         footer {
@@ -584,7 +624,7 @@
 
                 <div class="exercise">
                     <p><strong>6. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓ — tap the ✕ on a filled box to remove it</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l1_chain_display">
@@ -674,7 +714,7 @@
 
                 <div class="exercise">
                     <p><strong>6. Put the steps of the greenhouse effect mechanism in the correct order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓ — tap the ✕ on a filled box to remove it</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l2b_chain_display">
@@ -702,7 +742,7 @@
 
 <div class="exercise">
                     <p><strong>7. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓ — tap the ✕ on a filled box to remove it</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l2_chain_display">
@@ -797,7 +837,7 @@
 
 <div class="exercise">
                     <p><strong>8. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓ — tap the ✕ on a filled box to remove it</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l3_chain_display">
@@ -1617,6 +1657,17 @@
                 slot.addEventListener('click', e => {
                     const slotNum = parseInt(slot.dataset.slot);
 
+                    // Tapping the ✕ always removes the item from this slot
+                    if (e.target.classList.contains('slot-remove')) {
+                        const current = chainSlots[chainKey][slotNum];
+                        if (current && current.el) {
+                            current.el.style.display = '';
+                        }
+                        chainSlots[chainKey][slotNum] = null;
+                        renderSlot(chainKey, slotNum);
+                        return;
+                    }
+
                     // A source item is selected: place it here
                     if (selectedItem) {
                         placeItemInSlot(chainKey, slotNum, selectedItem);
@@ -1624,7 +1675,7 @@
                         return;
                     }
 
-                    // No selection: tapping a filled slot clears it
+                    // No selection: tapping a filled slot also clears it
                     const current = chainSlots[chainKey][slotNum];
                     if (current) {
                         if (current.el) {
@@ -1644,14 +1695,24 @@
 
             if (!slot) return;
 
+            slot.textContent = '';
+            slot.style.cursor = 'pointer';
+
             if (item) {
-                slot.textContent = item.text;
+                const textSpan = document.createElement('span');
+                textSpan.className = 'slot-text';
+                textSpan.textContent = item.text;
+
+                const removeBtn = document.createElement('span');
+                removeBtn.className = 'slot-remove';
+                removeBtn.textContent = '✕';
+                removeBtn.title = 'Remove';
+
+                slot.appendChild(textSpan);
+                slot.appendChild(removeBtn);
                 slot.classList.add('filled');
-                slot.style.cursor = 'pointer';
             } else {
-                slot.textContent = '';
                 slot.classList.remove('filled');
-                slot.style.cursor = 'pointer';
             }
         }
 
