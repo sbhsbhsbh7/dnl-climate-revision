@@ -430,11 +430,10 @@
             border: 2px solid #999;
             padding: 12px;
             border-radius: 6px;
-            cursor: grab;
+            cursor: pointer;
             text-align: center;
             transition: all 0.2s;
             font-size: 0.9em;
-            touch-action: none;
         }
 
         .chain-source-item:hover {
@@ -443,7 +442,6 @@
         }
 
         .chain-source-item:active {
-            cursor: grabbing;
             opacity: 0.7;
         }
 
@@ -573,7 +571,7 @@
 
                 <div class="exercise">
                     <p><strong>6. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l1_chain_display">
@@ -587,12 +585,12 @@
                         </div>
                     </div>
 
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (tap one, then tap a box above):</strong></p>
                     <div class="chain-source" id="l1_chain_source">
-                        <div class="chain-source-item" draggable="true" data-id="l1-c3">Carbon dioxide is released</div>
-                        <div class="chain-source-item" draggable="true" data-id="l1-c1">The Industrial Revolution begins</div>
-                        <div class="chain-source-item" draggable="true" data-id="l1-c4">Atmospheric CO₂ rises</div>
-                        <div class="chain-source-item" draggable="true" data-id="l1-c2">Factories burn coal and oil</div>
+                        <div class="chain-source-item" data-id="l1-c3">Carbon dioxide is released</div>
+                        <div class="chain-source-item" data-id="l1-c1">The Industrial Revolution begins</div>
+                        <div class="chain-source-item" data-id="l1-c4">Atmospheric CO₂ rises</div>
+                        <div class="chain-source-item" data-id="l1-c2">Factories burn coal and oil</div>
                     </div>
 
                     <button class="check-btn" onclick="checkChainOrder('l1', 'l1', 2.5)" id="btn_l1_chain">Check order</button>
@@ -663,7 +661,7 @@
 
                 <div class="exercise">
                     <p><strong>6. Put the steps of the greenhouse effect mechanism in the correct order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each step into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l2b_chain_display">
@@ -677,12 +675,12 @@
                         </div>
                     </div>
 
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (tap one, then tap a box above):</strong></p>
                     <div class="chain-source" id="l2b_chain_source">
-                        <div class="chain-source-item" draggable="true" data-id="l2b-c3">The infrared radiation is absorbed and re-emitted in all directions, including back towards the Earth's surface</div>
-                        <div class="chain-source-item" draggable="true" data-id="l2b-c1">The Sun sends out rays, part of which is absorbed by the Earth's surface</div>
-                        <div class="chain-source-item" draggable="true" data-id="l2b-c4">The Earth's surface temperature rises all the more as there are more greenhouse gases in the atmosphere</div>
-                        <div class="chain-source-item" draggable="true" data-id="l2b-c2">The warmed Earth's surface emits infrared radiation</div>
+                        <div class="chain-source-item" data-id="l2b-c3">The infrared radiation is absorbed and re-emitted in all directions, including back towards the Earth's surface</div>
+                        <div class="chain-source-item" data-id="l2b-c1">The Sun sends out rays, part of which is absorbed by the Earth's surface</div>
+                        <div class="chain-source-item" data-id="l2b-c4">The Earth's surface temperature rises all the more as there are more greenhouse gases in the atmosphere</div>
+                        <div class="chain-source-item" data-id="l2b-c2">The warmed Earth's surface emits infrared radiation</div>
                     </div>
 
                     <button class="check-btn" onclick="checkChainOrder('l2b', 'l2', 2.5)" id="btn_l2b_chain">Check order</button>
@@ -691,7 +689,7 @@
 
 <div class="exercise">
                     <p><strong>7. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l2_chain_display">
@@ -705,12 +703,12 @@
                         </div>
                     </div>
 
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (tap one, then tap a box above):</strong></p>
                     <div class="chain-source" id="l2_chain_source">
-                        <div class="chain-source-item" draggable="true" data-id="l2-c3">Infrared radiation is absorbed by greenhouse gases</div>
-                        <div class="chain-source-item" draggable="true" data-id="l2-c1">Fossil fuels are burned</div>
-                        <div class="chain-source-item" draggable="true" data-id="l2-c4">Earth's surface warms</div>
-                        <div class="chain-source-item" draggable="true" data-id="l2-c2">Carbon dioxide is emitted into the atmosphere</div>
+                        <div class="chain-source-item" data-id="l2-c3">Infrared radiation is absorbed by greenhouse gases</div>
+                        <div class="chain-source-item" data-id="l2-c1">Fossil fuels are burned</div>
+                        <div class="chain-source-item" data-id="l2-c4">Earth's surface warms</div>
+                        <div class="chain-source-item" data-id="l2-c2">Carbon dioxide is emitted into the atmosphere</div>
                     </div>
 
                     <button class="check-btn" onclick="checkChainOrder('l2', 'l2', 2.5)" id="btn_l2_chain">Check order</button>
@@ -786,7 +784,7 @@
 
 <div class="exercise">
                     <p><strong>8. Drag the events in the correct causal order:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: drag each event into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Complete the chain: tap a card below, then tap the box where it belongs ↓</p>
 
                     <div class="chain-container">
                         <div class="chain-display" id="l3_chain_display">
@@ -802,13 +800,13 @@
                         </div>
                     </div>
 
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (drag to the slots above):</strong></p>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available items (tap one, then tap a box above):</strong></p>
                     <div class="chain-source" id="l3_chain_source">
-                        <div class="chain-source-item" draggable="true" data-id="l3-c3">Human exposure</div>
-                        <div class="chain-source-item" draggable="true" data-id="l3-c1">Fossil-fuel combustion</div>
-                        <div class="chain-source-item" draggable="true" data-id="l3-c4">Respiratory &amp; cardiovascular effects</div>
-                        <div class="chain-source-item" draggable="true" data-id="l3-c2">PM₂.₅ + NO₂ + other pollutants</div>
-                        <div class="chain-source-item" draggable="true" data-id="l3-c5">Increased illness and deaths</div>
+                        <div class="chain-source-item" data-id="l3-c3">Human exposure</div>
+                        <div class="chain-source-item" data-id="l3-c1">Fossil-fuel combustion</div>
+                        <div class="chain-source-item" data-id="l3-c4">Respiratory &amp; cardiovascular effects</div>
+                        <div class="chain-source-item" data-id="l3-c2">PM₂.₅ + NO₂ + other pollutants</div>
+                        <div class="chain-source-item" data-id="l3-c5">Increased illness and deaths</div>
                     </div>
 
                     <button class="check-btn" onclick="checkChainOrder('l3', 'l3', 2.5)" id="btn_l3_chain">Check order</button>
@@ -873,7 +871,7 @@
 
                 <div class="exercise">
                     <p><strong>7. Sort each solution into the climate challenge it helps solve:</strong></p>
-                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Drag each solution below into the correct box ↓ <em>(on phone/tablet: tap a card, then tap the box)</em></p>
+                    <p style="margin-top: 12px; color: #666; font-size: 0.9em;">Tap a solution below, then tap the box where it belongs ↓</p>
 
                     <div class="sort-container" id="l4_sort_display">
                         <div class="sort-zone" data-category="water-stress">
@@ -894,19 +892,19 @@
                         </div>
                     </div>
 
-                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available solutions (drag to a box above, click a placed item to send it back):</strong></p>
+                    <p style="margin-top: 15px; color: #666; font-size: 0.9em;"><strong>Available solutions (tap one, then tap a box above; tap a placed item to send it back):</strong></p>
                     <div class="chain-source" id="l4_sort_source">
-                        <div class="chain-source-item" draggable="true" data-category="water-stress">Rainwater harvesting</div>
-                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Trees</div>
-                        <div class="chain-source-item" draggable="true" data-category="sea-level-rise">Thames Barrier</div>
-                        <div class="chain-source-item" draggable="true" data-category="flooding">Green infrastructure solutions (rain gardens, wetlands…)</div>
-                        <div class="chain-source-item" draggable="true" data-category="water-stress">Leak repair</div>
-                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Shade</div>
-                        <div class="chain-source-item" draggable="true" data-category="sea-level-rise">Higher river walls</div>
-                        <div class="chain-source-item" draggable="true" data-category="flooding">Permeable paving</div>
-                        <div class="chain-source-item" draggable="true" data-category="water-stress">Efficient taps</div>
-                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Cool spaces</div>
-                        <div class="chain-source-item" draggable="true" data-category="heatwaves">Green roofs</div>
+                        <div class="chain-source-item" data-category="water-stress">Rainwater harvesting</div>
+                        <div class="chain-source-item" data-category="heatwaves">Trees</div>
+                        <div class="chain-source-item" data-category="sea-level-rise">Thames Barrier</div>
+                        <div class="chain-source-item" data-category="flooding">Green infrastructure solutions (rain gardens, wetlands…)</div>
+                        <div class="chain-source-item" data-category="water-stress">Leak repair</div>
+                        <div class="chain-source-item" data-category="heatwaves">Shade</div>
+                        <div class="chain-source-item" data-category="sea-level-rise">Higher river walls</div>
+                        <div class="chain-source-item" data-category="flooding">Permeable paving</div>
+                        <div class="chain-source-item" data-category="water-stress">Efficient taps</div>
+                        <div class="chain-source-item" data-category="heatwaves">Cool spaces</div>
+                        <div class="chain-source-item" data-category="heatwaves">Green roofs</div>
                     </div>
 
                     <button class="check-btn" onclick="checkSortZones('l4', 4)" id="btn_l4_sort">Check answers</button>
@@ -1380,8 +1378,7 @@
 
 
         // DRAG & DROP CHAIN LOGIC WITH SLOTS
-        let draggedElement = null; // native HTML5 drag-and-drop (desktop mouse)
-        let selectedItem = null;   // tap-to-select / tap-to-place (mobile/touch)
+        let selectedItem = null;   // tap/click-to-select, then tap/click-to-place (works on mouse and touch)
         let chainData = {
             'l1': {
                 1: 'l1-c1',
@@ -1488,19 +1485,10 @@
 
             if (!displayEl || !sourceEl) return;
 
-            // Setup source items
+            // Setup source items: tap/click to select, works identically on
+            // mouse, trackpad and touch screens (no native drag-and-drop,
+            // which is unreliable on mobile browsers).
             document.querySelectorAll(`#${chainKey}_chain_source .chain-source-item`).forEach(item => {
-                // Desktop: native HTML5 drag and drop
-                item.addEventListener('dragstart', e => {
-                    draggedElement = item;
-                    item.style.opacity = '0.5';
-                });
-                item.addEventListener('dragend', e => {
-                    item.style.opacity = '1';
-                    draggedElement = null;
-                });
-
-                // Mobile/touch fallback: tap to select, then tap a box to place it
                 item.addEventListener('click', e => {
                     if (selectedItem === item) {
                         item.classList.remove('selected');
@@ -1513,35 +1501,12 @@
                 });
             });
 
-            // Setup slots
+            // Setup slots: tap/click to place the selected item, or to clear
             displayEl.querySelectorAll('.chain-slot').forEach(slot => {
-                slot.addEventListener('dragover', e => {
-                    e.preventDefault();
-                    slot.style.borderColor = '#6b6f47';
-                    slot.style.backgroundColor = '#eef2ee';
-                });
-
-                slot.addEventListener('dragleave', e => {
-                    slot.style.borderColor = '#2d4a3a';
-                    slot.style.backgroundColor = 'white';
-                });
-
-                slot.addEventListener('drop', e => {
-                    e.preventDefault();
-                    slot.style.borderColor = '#2d4a3a';
-                    slot.style.backgroundColor = 'white';
-
-                    if (!draggedElement) return;
-
-                    const slotNum = parseInt(slot.dataset.slot);
-                    placeItemInSlot(chainKey, slotNum, draggedElement);
-                    draggedElement = null;
-                });
-
                 slot.addEventListener('click', e => {
                     const slotNum = parseInt(slot.dataset.slot);
 
-                    // Tap mode: a source item is selected, place it here
+                    // A source item is selected: place it here
                     if (selectedItem) {
                         placeItemInSlot(chainKey, slotNum, selectedItem);
                         selectedItem = null;
@@ -1575,7 +1540,7 @@
             } else {
                 slot.textContent = '';
                 slot.classList.remove('filled');
-                slot.style.cursor = 'drop';
+                slot.style.cursor = 'pointer';
             }
         }
 
@@ -1586,17 +1551,8 @@
             if (!sourceEl || !displayEl) return;
 
             function attachItemHandlers(item) {
-                // Desktop: native HTML5 drag and drop
-                item.addEventListener('dragstart', e => {
-                    draggedElement = item;
-                    item.style.opacity = '0.5';
-                });
-                item.addEventListener('dragend', e => {
-                    item.style.opacity = '1';
-                    draggedElement = null;
-                });
-
-                // Mobile/touch fallback: tap to select / tap a placed item to send it back
+                // Tap/click to select, or tap a placed item to send it back to the pool.
+                // Works identically on mouse and touch screens.
                 item.addEventListener('click', e => {
                     e.stopPropagation();
                     if (item.parentElement && item.parentElement.classList.contains('sort-zone-items')) {
@@ -1622,22 +1578,8 @@
 
             displayEl.querySelectorAll('.sort-zone').forEach(zone => {
                 const dropArea = zone.querySelector('.sort-zone-items');
-                zone.addEventListener('dragover', e => {
-                    e.preventDefault();
-                    zone.classList.add('dragover');
-                });
-                zone.addEventListener('dragleave', e => {
-                    zone.classList.remove('dragover');
-                });
-                zone.addEventListener('drop', e => {
-                    e.preventDefault();
-                    zone.classList.remove('dragover');
-                    if (!draggedElement) return;
-                    dropArea.appendChild(draggedElement);
-                    draggedElement = null;
-                });
 
-                // Mobile/touch fallback: tap a box to drop the selected item here
+                // Tap a box to drop the selected item here
                 zone.addEventListener('click', e => {
                     if (!selectedItem) return;
                     dropArea.appendChild(selectedItem);
